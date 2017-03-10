@@ -7,7 +7,7 @@ import {
     Keyboard
 } from 'react-native';
 
-import {GiftedChat, Actions, Bubble} from 'react-native-gifted-chat';
+import {GiftedChat, Actions, Bubble, ActionsRight} from 'react-native-gifted-chat';
 import CustomActions from './CustomActions';
 import CustomView from './CustomView';
 
@@ -129,39 +129,11 @@ export default class Example extends React.Component {
     }
 
     renderCustomActions(props) {
-
-        // if (Platform.OS === 'ios') {
-        //     return (
-        //         <CustomActions
-        //             {...props}
-        //         />
-        //     );
-        // }
-
-        const options = {
-            'Action 1': (props) => {
-                alert('option 1');
-            },
-            'Action 2': (props) => {
-                // alert('option 2');
-                this.refs.chat.changeEmoji();
-            },
-            'Cancel': () => {
-            },
-        };
-
         return (
             <Actions
-                ref="act"
                 {...props}
-                options={options}
             />
         );
-    }
-
-    _onPressActionButton(){
-        Keyboard.dismiss();
-        this.refs.act.onActionsPress()
     }
 
     renderBubble(props) {
@@ -198,6 +170,27 @@ export default class Example extends React.Component {
         return null;
     }
 
+    renderRightAction(props) {
+        const options = {
+            'Action 1': (props) => {
+                alert('option 1');
+            },
+            'Action 2': (props) => {
+                // alert('option 2');
+                this.refs.chat.changeEmoji();
+            },
+            'Cancel': () => {
+            },
+        };
+
+        return (
+            <ActionsRight
+                {...props}
+                options={options}
+            />
+        );
+    }
+
     render() {
         return (
             <GiftedChat
@@ -207,7 +200,7 @@ export default class Example extends React.Component {
                 loadEarlier={this.state.loadEarlier}
                 onLoadEarlier={this.onLoadEarlier}
                 isLoadingEarlier={this.state.isLoadingEarlier}
-
+                renderRig
                 user={{
                     _id: 1, // sent messages should have same user._id
                 }}
@@ -215,6 +208,7 @@ export default class Example extends React.Component {
                 renderBubble={this.renderBubble}
                 renderCustomView={this.renderCustomView}
                 renderFooter={this.renderFooter}
+                renderActionsRight={this.renderRightAction}
             />
         );
     }

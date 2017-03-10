@@ -6,13 +6,13 @@ import {
     View,
 } from 'react-native';
 
-export default class Actions extends React.Component {
+export default class ActionsRight extends React.Component {
     constructor(props) {
         super(props);
-        this.onActionsPress = this.onActionsPress.bind(this);
+        this.onPressActionRightButton = this.onPressActionRightButton.bind(this);
     }
 
-    onActionsPress() {
+    onPressActionRightButton() {
         const options = Object.keys(this.props.options);
         const cancelButtonIndex = Object.keys(this.props.options).length - 1;
         this.context.actionSheet().showActionSheetWithOptions({
@@ -55,7 +55,7 @@ export default class Actions extends React.Component {
         return (
             <TouchableOpacity
                 style={[styles.container, this.props.containerStyle]}
-                onPress={this.props.onPressActionButton || this.onActionsPress}
+                onPress={this.props.onPressActionRightButton || this.onPressActionRightButton}
             >
                 {this.renderIcon()}
             </TouchableOpacity>
@@ -86,11 +86,11 @@ const styles = StyleSheet.create({
     },
 });
 
-Actions.contextTypes = {
+ActionsRight.contextTypes = {
     actionSheet: React.PropTypes.func,
 };
 
-Actions.defaultProps = {
+ActionsRight.defaultProps = {
     onSend: () => {
     },
     options: {},
@@ -100,12 +100,12 @@ Actions.defaultProps = {
     iconTextStyle: {},
 };
 
-Actions.propTypes = {
+ActionsRight.propTypes = {
     onSend: React.PropTypes.func,
     options: React.PropTypes.object,
     optionTintColor: React.PropTypes.string,
     icon: React.PropTypes.func,
-    onPressActionButton: React.PropTypes.func,
+    onPressActionRightButton: React.PropTypes.func,
     containerStyle: View.propTypes.style,
     iconTextStyle: Text.propTypes.style,
 };

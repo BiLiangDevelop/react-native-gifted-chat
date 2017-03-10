@@ -28,6 +28,7 @@ import Send from './Send';
 import Time from './Time';
 import GiftedAvatar from './GiftedAvatar';
 import EmojiPicker from 'react-native-emoji-picker';
+import ActionsRight from './ActionsRight';
 
 // Min and max heights of ToolbarInput and Composer
 // Needed for Composer auto grow and ScrollView animation
@@ -40,7 +41,6 @@ const MAX_COMPOSER_HEIGHT = 100;
 const MIN_INPUT_TOOLBAR_HEIGHT = 44;
 
 var DEFAULT_EMOJI_HEIGHT = 277;
-var fromChangeView = false;
 
 class GiftedChat extends React.Component {
     constructor(props) {
@@ -518,6 +518,7 @@ GiftedChat.defaultProps = {
     }),
     renderAccessory: null,
     renderActions: null,
+    renderActionsRight: null,
     renderAvatar: null,
     renderBubble: null,
     renderFooter: null,
@@ -549,6 +550,7 @@ GiftedChat.propTypes = {
     isAnimated: React.PropTypes.bool,
     renderAccessory: React.PropTypes.func,
     renderActions: React.PropTypes.func,
+    renderActionsRight: React.PropTypes.func,
     renderAvatar: React.PropTypes.func,
     renderBubble: React.PropTypes.func,
     renderFooter: React.PropTypes.func,
@@ -586,5 +588,6 @@ export {
     Send,
     Time,
     GiftedAvatar,
-    utils
+    utils,
+    ActionsRight
 };
