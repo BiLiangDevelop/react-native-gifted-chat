@@ -4,6 +4,7 @@ import {
     StyleSheet,
     Text,
     View,
+    Keyboard
 } from 'react-native';
 
 import {GiftedChat, Actions, Bubble} from 'react-native-gifted-chat';
@@ -128,13 +129,15 @@ export default class Example extends React.Component {
     }
 
     renderCustomActions(props) {
-        if (Platform.OS === 'ios') {
-            return (
-                <CustomActions
-                    {...props}
-                />
-            );
-        }
+
+        // if (Platform.OS === 'ios') {
+        //     return (
+        //         <CustomActions
+        //             {...props}
+        //         />
+        //     );
+        // }
+
         const options = {
             'Action 1': (props) => {
                 alert('option 1');
@@ -146,12 +149,19 @@ export default class Example extends React.Component {
             'Cancel': () => {
             },
         };
+
         return (
             <Actions
+                ref="act"
                 {...props}
                 options={options}
             />
         );
+    }
+
+    _onPressActionButton(){
+        Keyboard.dismiss();
+        this.refs.act.onActionsPress()
     }
 
     renderBubble(props) {

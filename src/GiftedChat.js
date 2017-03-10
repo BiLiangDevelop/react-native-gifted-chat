@@ -5,6 +5,7 @@ import {
     Platform,
     StyleSheet,
     View,
+    Keyboard
 } from 'react-native';
 
 import ActionSheet from '@exponent/react-native-action-sheet';
@@ -38,6 +39,9 @@ const MIN_COMPOSER_HEIGHT = Platform.select({
 const MAX_COMPOSER_HEIGHT = 100;
 const MIN_INPUT_TOOLBAR_HEIGHT = 44;
 
+var DEFAULT_EMOJI_HEIGHT = 277;
+var fromChangeView = false;
+
 class GiftedChat extends React.Component {
     constructor(props) {
         super(props);
@@ -54,7 +58,7 @@ class GiftedChat extends React.Component {
         this.state = {
             isInitialized: false, // initialization will calculate maxHeight before rendering the chat
             composerHeight: MIN_COMPOSER_HEIGHT,
-            messagesContainerHeight: null,
+            messagesContainerHeight: new Animated.Value(0),
             typingDisabled: false,
             showEmoji: false
         };
@@ -82,7 +86,15 @@ class GiftedChat extends React.Component {
     }
 
     changeEmoji() {
-        this.state.showEmoji = !this.state.showEmoji;
+        console.log('changeEmoji->before:' + this.state.messagesContainerHeight);
+        // const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset();
+        this.getKeyboardHeight() > 0 ? Keyboard.dismiss() : null;
+        this.setState({
+            showEmoji: true,
+            // messagesContainerHeight: newMessagesContainerHeight
+        });
+        console.log('changeEmoji->after:' + this.state.messagesContainerHeight);
+
         console.log('showEmoji:' + this.state.showEmoji);
     }
 
@@ -216,21 +228,27 @@ class GiftedChat extends React.Component {
     }
 
     onKeyboardWillShow(e) {
-        this.state.showEmoji = false;
+        this.setState({
+            showEmoji: false,
+            messagesContainerHeight: this.state.showEmoji ? this.state.messagesContainerHeight + DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight
+        });
         this.setIsTypingDisabled(true);
         this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
+        DEFAULT_EMOJI_HEIGHT = this.getKeyboardHeight();
         this.setBottomOffset(this.props.bottomOffset);
         const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset();
-        if (this.props.isAnimated === true) {
-            Animated.timing(this.state.messagesContainerHeight, {
-                toValue: newMessagesContainerHeight,
-                duration: 210,
-            }).start();
-        } else {
-            this.setState({
-                messagesContainerHeight: newMessagesContainerHeight,
-            });
-        }
+        // if (this.props.isAnimated === true) {
+        //     Animated.timing(this.state.messagesContainerHeight, {
+        //         toValue: newMessagesContainerHeight,
+        //         duration: 210,
+        //     }).start();
+        // } else {
+        console.log('onKeyboardWillShow->newMessagesContainerHeight:' + newMessagesContainerHeight);
+
+        this.setState({
+            messagesContainerHeight: newMessagesContainerHeight,
+        });
+        // }
     }
 
     onKeyboardWillHide() {
@@ -238,16 +256,18 @@ class GiftedChat extends React.Component {
         this.setKeyboardHeight(0);
         this.setBottomOffset(0);
         const newMessagesContainerHeight = this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT));
-        if (this.props.isAnimated === true) {
-            Animated.timing(this.state.messagesContainerHeight, {
-                toValue: newMessagesContainerHeight,
-                duration: 210,
-            }).start();
-        } else {
-            this.setState({
-                messagesContainerHeight: newMessagesContainerHeight,
-            });
-        }
+        // if (this.props.isAnimated === true) {
+        //     Animated.timing(this.state.messagesContainerHeight, {
+        //         toValue: newMessagesContainerHeight,
+        //         duration: 210,
+        //     }).start();
+        // } else {
+        console.log('onKeyboardWillHide->newMessagesContainerHeight:' + newMessagesContainerHeight);
+        let height = this.state.showEmoji ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : newMessagesContainerHeight;
+        this.setState({
+            messagesContainerHeight: height,
+        });
+        // }
     }
 
     onKeyboardDidShow(e) {
@@ -357,7 +377,6 @@ class GiftedChat extends React.Component {
     }
 
     onInitialLayoutViewLayout(e) {
-        console.log('onInitialLayoutViewLayout')
         const layout = e.nativeEvent.layout;
         if (layout.height <= 0) {
             return;
@@ -374,13 +393,10 @@ class GiftedChat extends React.Component {
     }
 
     onMainViewLayout(e) {
-        console.log('onMainViewLayout')
         if (Platform.OS === 'android') {
             // fix an issue when keyboard is dismissing during the initialization
             const layout = e.nativeEvent.layout;
-            const emojiHeight = this.state.showEmoji ? 300 : 0;
-            console.log('onMainViewLayout:' + emojiHeight)
-            if ((this.getMaxHeight() !== layout.height && this.getIsFirstLayout() === true) || emojiHeight > 0) {
+            if ((this.getMaxHeight() !== layout.height && this.getIsFirstLayout() === true)) {
                 this.setMaxHeight(layout.height);
                 this.setState({
                     messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight() - emojiHeight),
@@ -442,15 +458,14 @@ class GiftedChat extends React.Component {
 
     renderEmoji() {
         return this.state.showEmoji ? (
-                <View style={[styles.container, {flexDirection: "row", height: 300}]}>
-                    <EmojiPicker
-                        style={[styles.container, styles.emoji]}
-                        onEmojiSelected={this._emojiSelected}/>
-                </View>
+                <EmojiPicker
+                    style={[styles.container, styles.emoji]}
+                    onEmojiSelected={this._emojiSelected}/>
             ) : null;
     }
 
     render() {
+        console.log('render-->messagesContainerHeight-->' + this.state.messagesContainerHeight);
         if (this.state.isInitialized === true) {
             return (
                 <ActionSheet ref={component => this._actionSheetRef = component}>
@@ -477,7 +492,6 @@ const styles = StyleSheet.create({
     },
     emoji: {
         flexDirection: 'row',
-        height: 300
     }
 });
 
