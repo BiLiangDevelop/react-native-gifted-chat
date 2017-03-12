@@ -87,12 +87,12 @@ class GiftedChat extends React.Component {
 
     changeEmoji() {
         console.log('changeEmoji->before:' + this.state.messagesContainerHeight);
-        // const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset();
-        this.getKeyboardHeight() > 0 ? Keyboard.dismiss() : null;
+        const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset();
         this.setState({
             showEmoji: true,
-            // messagesContainerHeight: newMessagesContainerHeight
+            messagesContainerHeight: this.getKeyboardHeight() === 0 ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight
         });
+        this.getKeyboardHeight() > 0 ? Keyboard.dismiss() : null;
         console.log('changeEmoji->after:' + this.state.messagesContainerHeight);
 
         console.log('showEmoji:' + this.state.showEmoji);

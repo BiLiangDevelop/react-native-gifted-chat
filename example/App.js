@@ -170,27 +170,6 @@ export default class Example extends React.Component {
         return null;
     }
 
-    renderRightAction(props) {
-        const options = {
-            'Action 1': (props) => {
-                alert('option 1');
-            },
-            'Action 2': (props) => {
-                // alert('option 2');
-                this.refs.chat.changeEmoji();
-            },
-            'Cancel': () => {
-            },
-        };
-
-        return (
-            <ActionsRight
-                {...props}
-                options={options}
-            />
-        );
-    }
-
     render() {
         return (
             <GiftedChat
@@ -208,7 +187,28 @@ export default class Example extends React.Component {
                 renderBubble={this.renderBubble}
                 renderCustomView={this.renderCustomView}
                 renderFooter={this.renderFooter}
-                renderActionsRight={this.renderRightAction}
+                renderActionsRight={this.renderRightAction.bind(this)}
+            />
+        );
+    }
+
+    renderRightAction(props) {
+        const options = {
+            'Action 1': (props) => {
+                alert('option 1');
+            },
+            'Action 2': (props) => {
+                // alert('option 2');
+                this.refs.chat.changeEmoji();
+            },
+            'Cancel': () => {
+            },
+        };
+
+        return (
+            <ActionsRight
+                {...props}
+                options={options}
             />
         );
     }
