@@ -123,7 +123,8 @@ export default class InputToolbar extends React.Component {
 
     render() {
         return (
-            <View style={[styles.container, this.props.containerStyle]}>
+            <View
+                style={[styles.container, this.props.containerStyle, {borderTopWidth: this.props.showBorderTop ? StyleSheet.hairlineWidth : 0}]}>
                 <View style={[styles.primary, this.props.primaryStyle]}>
                     {this.renderActions()}
                     {this.renderContentBar()}
@@ -137,7 +138,6 @@ export default class InputToolbar extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        borderTopWidth: StyleSheet.hairlineWidth,
         borderTopColor: '#b2b2b2',
         backgroundColor: '#FFFFFF',
     },
@@ -179,6 +179,7 @@ InputToolbar.defaultProps = {
     containerStyle: {},
     primaryStyle: {},
     accessoryStyle: {},
+    showBorderTop: true,
 };
 
 InputToolbar.propTypes = {
@@ -192,4 +193,5 @@ InputToolbar.propTypes = {
     containerStyle: View.propTypes.style,
     primaryStyle: View.propTypes.style,
     accessoryStyle: View.propTypes.style,
+    showBorderTop: React.PropTypes.bool
 };
