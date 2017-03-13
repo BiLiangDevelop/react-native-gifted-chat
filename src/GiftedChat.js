@@ -27,7 +27,6 @@ import MessageContainer from './MessageContainer';
 import Send from './Send';
 import Time from './Time';
 import GiftedAvatar from './GiftedAvatar';
-import EmojiPicker from 'react-native-emoji-picker';
 import ActionsRight from './ActionsRight';
 import ClarifyBar from './ClarifyBar'
 
@@ -455,15 +454,10 @@ class GiftedChat extends React.Component {
         return null;
     }
 
-    _emojiSelected(emoji) {
-        console.log(emoji)
-    }
-
     renderEmoji() {
         return this.state.showEmoji ? (
-                <EmojiPicker
-                    style={[styles.container, styles.emoji]}
-                    onEmojiSelected={this._emojiSelected}/>
+                <View
+                    style={[styles.container, styles.emoji]}/>
             ) : null;
     }
 
