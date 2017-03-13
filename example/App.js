@@ -183,7 +183,6 @@ export default class Example extends React.Component {
                 user={{
                     _id: 1, // sent messages should have same user._id
                 }}
-                renderActions={this.renderCustomActions}
                 renderBubble={this.renderBubble}
                 renderCustomView={this.renderCustomView}
                 renderFooter={this.renderFooter}

@@ -2,21 +2,69 @@ import React from 'react';
 import {
     StyleSheet,
     View,
+    Text,
+    TouchableOpacity
 } from 'react-native';
 
 import Composer from './Composer';
 import Send from './Send';
 import Actions from './Actions';
 import ActionsRight from './ActionsRight';
+import RecordAudioBar from './RecordAudioBar'
 
 export default class InputToolbar extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {inputAudio: false}
+    }
+
     renderActions() {
-        if (this.props.renderActions) {
-            return this.props.renderActions(this.props);
-        } else if (this.props.onPressActionButton) {
-            return <Actions {...this.props} />;
-        }
-        return null;
+        return this.state.inputAudio ? this.iconAudio() : this.iconText()
+    }
+
+    iconAudio() {
+        return (
+            <TouchableOpacity
+                onPress={() => {
+                    this.setState({
+                        inputAudio: !this.state.inputAudio,
+                    })
+                }}
+                style={[styles.action, this.props.containerStyle]}>
+                <View
+                    style={[styles.wrapper, this.props.wrapperStyle]}
+                >
+                    <Text
+                        style={[styles.iconText, this.props.iconTextStyle]}
+                    >
+                        +
+                    </Text>
+                </View>
+            </TouchableOpacity>
+        )
+    }
+
+    iconText() {
+        return (
+            <TouchableOpacity
+                onPress={() => {
+                    this.setState({
+                        inputAudio: !this.state.inputAudio,
+                    })
+                }}
+                style={[styles.action, this.props.containerStyle]}>
+                <View
+                    style={[styles.wrapper, this.props.wrapperStyle]}
+                >
+                    <Text
+                        style={[styles.iconText, this.props.iconTextStyle]}
+                    >
+                        -
+                    </Text>
+                </View>
+            </TouchableOpacity>
+        )
     }
 
     renderActionsRight() {
@@ -32,10 +80,10 @@ export default class InputToolbar extends React.Component {
         if (this.props.renderSend) {
             return this.props.renderSend(this.props);
         }
-        if(this.props.text.trim().length>0){
+        if (this.props.text.trim().length > 0) {
             return <Send {...this.props}/>;
-        }else{
-           return this.renderActionsRight();
+        } else {
+            return this.renderActionsRight();
         }
 
     }
@@ -50,6 +98,16 @@ export default class InputToolbar extends React.Component {
                 {...this.props}
             />
         );
+    }
+
+    renderAudioBar() {
+        return (
+            <RecordAudioBar />
+        )
+    }
+
+    renderContentBar() {
+        return this.state.inputAudio ? this.renderAudioBar() : this.renderComposer();
     }
 
     renderAccessory() {
@@ -68,7 +126,7 @@ export default class InputToolbar extends React.Component {
             <View style={[styles.container, this.props.containerStyle]}>
                 <View style={[styles.primary, this.props.primaryStyle]}>
                     {this.renderActions()}
-                    {this.renderComposer()}
+                    {this.renderContentBar()}
                     {this.renderSend()}
                 </View>
                 {this.renderAccessory()}
@@ -89,6 +147,26 @@ const styles = StyleSheet.create({
     },
     accessory: {
         height: 44,
+    },
+    wrapper: {
+        borderRadius: 13,
+        borderColor: '#b2b2b2',
+        borderWidth: 2,
+        flex: 1
+    },
+    action: {
+        width: 26,
+        height: 26,
+        marginLeft: 10,
+        marginBottom: 10,
+        marginRight: 10,
+    },
+    iconText: {
+        color: '#b2b2b2',
+        fontWeight: 'bold',
+        fontSize: 16,
+        backgroundColor: 'transparent',
+        textAlign: 'center',
     },
 });
 
