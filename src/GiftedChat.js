@@ -29,6 +29,7 @@ import Time from './Time';
 import GiftedAvatar from './GiftedAvatar';
 import EmojiPicker from 'react-native-emoji-picker';
 import ActionsRight from './ActionsRight';
+import ClarifyBar from './ClarifyBar'
 
 // Min and max heights of ToolbarInput and Composer
 // Needed for Composer auto grow and ScrollView animation
@@ -73,6 +74,7 @@ class GiftedChat extends React.Component {
         this.onInputTextChanged = this.onInputTextChanged.bind(this);
         this.onMainViewLayout = this.onMainViewLayout.bind(this);
         this.onInitialLayoutViewLayout = this.onInitialLayoutViewLayout.bind(this);
+        this.renderInputToolbar = this.renderInputToolbar.bind(this)
 
 
         this.invertibleScrollViewProps = {
@@ -412,7 +414,7 @@ class GiftedChat extends React.Component {
         const inputToolbarProps = {
             ...this.props,
             text: this.state.text,
-            composerHeight: Math.max(MIN_COMPOSER_HEIGHT, this.state.composerHeight),
+            composerHeight: Math.min(MIN_COMPOSER_HEIGHT, this.state.composerHeight),
             onSend: this.onSend,
             onInputSizeChanged: this.onInputSizeChanged,
             onTextChanged: this.onInputTextChanged,
@@ -464,6 +466,12 @@ class GiftedChat extends React.Component {
             ) : null;
     }
 
+    renderBottomBar() {
+        return this.props.isFromClarify
+            ? (<ClarifyBar inputToolbar={this.renderInputToolbar()}/>)
+            : this.renderInputToolbar()
+    }
+
     render() {
         console.log('render-->messagesContainerHeight-->' + this.state.messagesContainerHeight);
         if (this.state.isInitialized === true) {
@@ -471,7 +479,7 @@ class GiftedChat extends React.Component {
                 <ActionSheet ref={component => this._actionSheetRef = component}>
                     <View style={styles.container} onLayout={this.onMainViewLayout}>
                         {this.renderMessages()}
-                        {this.renderInputToolbar()}
+                        {this.renderBottomBar()}
                         {this.renderEmoji()}
                     </View>
                 </ActionSheet>
@@ -537,7 +545,8 @@ GiftedChat.defaultProps = {
     user: {},
     bottomOffset: 0,
     isLoadingEarlier: false,
-    messageIdGenerator: () => uuid.v4()
+    messageIdGenerator: () => uuid.v4(),
+    isFromClarify: true,
 };
 
 GiftedChat.propTypes = {
@@ -571,6 +580,7 @@ GiftedChat.propTypes = {
     isLoadingEarlier: React.PropTypes.bool,
     messageIdGenerator: React.PropTypes.func,
     keyboardShouldPersistTaps: React.PropTypes.oneOf(['always', 'never', 'handled']),
+    isFromClarify: React.PropTypes.bool,//是否从澄清界面过来
 };
 
 export {
@@ -589,5 +599,6 @@ export {
     Time,
     GiftedAvatar,
     utils,
-    ActionsRight
+    ActionsRight,
+    ClarifyBar
 };
