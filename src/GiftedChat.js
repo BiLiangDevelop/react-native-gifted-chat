@@ -29,6 +29,7 @@ import Time from './Time';
 import GiftedAvatar from './GiftedAvatar';
 import ActionsRight from './ActionsRight';
 import ClarifyBar from './ClarifyBar'
+import IconButton from './IconButton'
 
 // Min and max heights of ToolbarInput and Composer
 // Needed for Composer auto grow and ScrollView animation
@@ -595,5 +596,6 @@ export {
     GiftedAvatar,
     utils,
     ActionsRight,
-    ClarifyBar
+    ClarifyBar,
+    IconButton
 };

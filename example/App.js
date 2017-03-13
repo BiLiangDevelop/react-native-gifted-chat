@@ -7,7 +7,7 @@ import {
     Keyboard
 } from 'react-native';
 
-import {GiftedChat, Actions, Bubble, ActionsRight} from 'react-native-gifted-chat';
+import {GiftedChat, Actions, Bubble, ActionsRight, IconButton} from 'react-native-gifted-chat';
 import CustomActions from './CustomActions';
 import CustomView from './CustomView';
 
@@ -192,22 +192,12 @@ export default class Example extends React.Component {
     }
 
     renderRightAction(props) {
-        const options = {
-            'Action 1': (props) => {
-                alert('option 1');
-            },
-            'Action 2': (props) => {
-                // alert('option 2');
-                this.refs.chat.changeEmoji();
-            },
-            'Cancel': () => {
-            },
-        };
-
         return (
-            <ActionsRight
-                {...props}
-                options={options}
+            <IconButton
+                onIconClick={()=>{
+                    this.refs.chat.changeEmoji();
+                }}
+                textIcon='+'
             />
         );
     }

@@ -9,6 +9,7 @@ import {
     TouchableOpacity,
     Platform
 } from 'react-native';
+import IconButton from './IconButton'
 
 export default class ClarifyBar extends React.Component {
 
