@@ -205,11 +205,12 @@ export default class Example extends React.Component {
 
     renderCustomMenu(props){
         return (
-            <View>
-                <Text>
-                    This is custom menu
-                </Text>
-            </View>
+            <IconButton
+                onIconClick={()=>{
+                    this.refs.chat.hideCustomMenu();
+                }}
+                textIcon='+'
+            />
         );
     }
 }

@@ -115,6 +115,13 @@ class GiftedChat extends React.Component {
         }
     }
 
+    hideCustomMenu(){
+        this.setState({
+            showCustomMenu: false,
+            messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight
+        });
+    }
+
     static append(currentMessages = [], messages) {
         if (!Array.isArray(messages)) {
             messages = [messages];
