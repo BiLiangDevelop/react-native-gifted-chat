@@ -96,7 +96,7 @@ class GiftedChat extends React.Component {
         this.setState({
             showCustomMenu: true,
             messagesContainerHeight: this.getKeyboardHeight() === 0 ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight,
-            typingDisabled:false
+            typingDisabled: false
         });
         if (this.getKeyboardHeight() > 0) {
             if (Keyboard.dismiss) {
@@ -466,10 +466,9 @@ class GiftedChat extends React.Component {
     }
 
     renderEmoji() {
-        return this.state.showCustomMenu ? (
-                <View
-                    style={[styles.container, styles.emoji]}/>
-            ) : null;
+        return this.state.showCustomMenu
+            ? (this.props.renderCustomMenu ? this.props.renderCustomMenu(this.props) : null)
+            : null;
     }
 
     renderBottomBar() {
@@ -502,9 +501,6 @@ class GiftedChat extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    emoji: {
-        flexDirection: 'row',
     }
 });
 
@@ -552,6 +548,7 @@ GiftedChat.defaultProps = {
     isLoadingEarlier: false,
     messageIdGenerator: () => uuid.v4(),
     isFromClarify: false,
+    renderCustomMenu: null,
 };
 
 GiftedChat.propTypes = {
@@ -586,6 +583,7 @@ GiftedChat.propTypes = {
     messageIdGenerator: React.PropTypes.func,
     keyboardShouldPersistTaps: React.PropTypes.oneOf(['always', 'never', 'handled']),
     isFromClarify: React.PropTypes.bool,//是否从澄清界面过来
+    renderCustomMenu: React.PropTypes.func,
 };
 
 export {
