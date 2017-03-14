@@ -64,7 +64,7 @@ class GiftedChat extends React.Component {
             composerHeight: MIN_COMPOSER_HEIGHT,
             messagesContainerHeight: new Animated.Value(0),
             typingDisabled: false,
-            showEmoji: false
+            showCustomMenu: false,
         };
 
         this.onKeyboardWillShow = this.onKeyboardWillShow.bind(this);
@@ -93,8 +93,9 @@ class GiftedChat extends React.Component {
     changeEmoji() {
         console.log('changeEmoji->before:' + this.state.messagesContainerHeight);
         const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset();
+        let menuCurrentVisible = this.state.showCustomMenu;
         this.setState({
-            showEmoji: true,
+            showCustomMenu: true,
             messagesContainerHeight: this.getKeyboardHeight() === 0 ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight
         });
         if (this.getKeyboardHeight() > 0) {
@@ -103,12 +104,15 @@ class GiftedChat extends React.Component {
             } else {
                 dismissKeyboard();
             }
-        }else{
-            this.textInput.focus();
+        } else {
+            if (menuCurrentVisible) {
+                this.textInput.focus();
+            }
+
         }
         console.log('changeEmoji->after:' + this.state.messagesContainerHeight);
 
-        console.log('showEmoji:' + this.state.showEmoji);
+        console.log('showCustomMenu:' + this.state.showCustomMenu);
     }
 
     static append(currentMessages = [], messages) {
@@ -242,8 +246,8 @@ class GiftedChat extends React.Component {
 
     onKeyboardWillShow(e) {
         this.setState({
-            showEmoji: false,
-            messagesContainerHeight: this.state.showEmoji ? this.state.messagesContainerHeight + DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight
+            showCustomMenu: false,
+            messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight
         });
         this.setIsTypingDisabled(true);
         this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
@@ -276,7 +280,7 @@ class GiftedChat extends React.Component {
         //     }).start();
         // } else {
         console.log('onKeyboardWillHide->newMessagesContainerHeight:' + newMessagesContainerHeight);
-        let height = this.state.showEmoji ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : newMessagesContainerHeight;
+        let height = this.state.showCustomMenu ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : newMessagesContainerHeight;
         this.setState({
             messagesContainerHeight: height,
         });
@@ -467,7 +471,7 @@ class GiftedChat extends React.Component {
     }
 
     renderEmoji() {
-        return this.state.showEmoji ? (
+        return this.state.showCustomMenu ? (
                 <View
                     style={[styles.container, styles.emoji]}/>
             ) : null;
