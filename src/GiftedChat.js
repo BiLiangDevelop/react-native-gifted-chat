@@ -44,7 +44,10 @@ const MIN_COMPOSER_HEIGHT = Platform.select({
 const MAX_COMPOSER_HEIGHT = 100;
 const MIN_INPUT_TOOLBAR_HEIGHT = 44;
 
-var DEFAULT_EMOJI_HEIGHT = 277;
+var DEFAULT_EMOJI_HEIGHT = Platform.select({
+    ios: 250/2,
+    android: 277/2,
+});;
 
 class GiftedChat extends React.Component {
     constructor(props) {
@@ -248,7 +251,8 @@ class GiftedChat extends React.Component {
         });
         this.setIsTypingDisabled(true);
         this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
-        DEFAULT_EMOJI_HEIGHT = this.getKeyboardHeight();
+        //打开后可跟键盘高度一样高
+        // DEFAULT_EMOJI_HEIGHT = this.getKeyboardHeight();
         this.setBottomOffset(this.props.bottomOffset);
         const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset();
         // if (this.props.isAnimated === true) {

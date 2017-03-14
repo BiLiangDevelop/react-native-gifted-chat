@@ -187,6 +187,7 @@ export default class Example extends React.Component {
                 renderCustomView={this.renderCustomView}
                 renderFooter={this.renderFooter}
                 renderActionsRight={this.renderRightAction.bind(this)}
+                renderCustomMenu={this.renderCustomMenu.bind(this)}
             />
         );
     }
@@ -199,6 +200,16 @@ export default class Example extends React.Component {
                 }}
                 textIcon='+'
             />
+        );
+    }
+
+    renderCustomMenu(props){
+        return (
+            <View>
+                <Text>
+                    This is custom menu
+                </Text>
+            </View>
         );
     }
 }
