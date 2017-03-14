@@ -192,22 +192,22 @@ export default class Example extends React.Component {
         );
     }
 
-    renderRightAction(props) {
+    renderCustomMenu(props){
         return (
             <IconButton
                 onIconClick={()=>{
-                    this.refs.chat.changeCustomMenu();
+                    this.refs.chat.hideCustomMenu();
                 }}
                 textIcon='+'
             />
         );
     }
 
-    renderCustomMenu(props){
+    renderRightAction(props) {
         return (
             <IconButton
                 onIconClick={()=>{
-                    this.refs.chat.hideCustomMenu();
+                    this.refs.chat.changeCustomMenu();
                 }}
                 textIcon='+'
             />

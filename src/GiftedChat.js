@@ -45,9 +45,10 @@ const MAX_COMPOSER_HEIGHT = 100;
 const MIN_INPUT_TOOLBAR_HEIGHT = 44;
 
 var DEFAULT_EMOJI_HEIGHT = Platform.select({
-    ios: 250/2,
-    android: 277/2,
-});;
+    ios: 250 / 2,
+    android: 277 / 2,
+});
+;
 
 class GiftedChat extends React.Component {
     constructor(props) {
@@ -109,13 +110,18 @@ class GiftedChat extends React.Component {
             }
         } else {
             if (menuCurrentVisible) {
-                this.textInput.focus();
+                if (this.textInput) {
+                    this.textInput.focus();
+                } else {
+                    this.hideCustomMenu();
+                }
+
             }
 
         }
     }
 
-    hideCustomMenu(){
+    hideCustomMenu() {
         this.setState({
             showCustomMenu: false,
             messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight
