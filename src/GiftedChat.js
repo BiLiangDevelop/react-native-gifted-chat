@@ -91,12 +91,12 @@ class GiftedChat extends React.Component {
     }
 
     changeCustomMenu() {
-        console.log('changeCustomMenu->before:' + this.state.messagesContainerHeight);
         const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset();
         let menuCurrentVisible = this.state.showCustomMenu;
         this.setState({
             showCustomMenu: true,
-            messagesContainerHeight: this.getKeyboardHeight() === 0 ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight
+            messagesContainerHeight: this.getKeyboardHeight() === 0 ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight,
+            typingDisabled:false
         });
         if (this.getKeyboardHeight() > 0) {
             if (Keyboard.dismiss) {
@@ -110,9 +110,6 @@ class GiftedChat extends React.Component {
             }
 
         }
-        console.log('changeCustomMenu->after:' + this.state.messagesContainerHeight);
-
-        console.log('showCustomMenu:' + this.state.showCustomMenu);
     }
 
     static append(currentMessages = [], messages) {
@@ -260,7 +257,6 @@ class GiftedChat extends React.Component {
         //         duration: 210,
         //     }).start();
         // } else {
-        console.log('onKeyboardWillShow->newMessagesContainerHeight:' + newMessagesContainerHeight);
 
         this.setState({
             messagesContainerHeight: newMessagesContainerHeight,
@@ -279,7 +275,6 @@ class GiftedChat extends React.Component {
         //         duration: 210,
         //     }).start();
         // } else {
-        console.log('onKeyboardWillHide->newMessagesContainerHeight:' + newMessagesContainerHeight);
         let height = this.state.showCustomMenu ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : newMessagesContainerHeight;
         this.setState({
             messagesContainerHeight: height,
@@ -484,7 +479,6 @@ class GiftedChat extends React.Component {
     }
 
     render() {
-        console.log('render-->messagesContainerHeight-->' + this.state.messagesContainerHeight);
         if (this.state.isInitialized === true) {
             return (
                 <ActionSheet ref={component => this._actionSheetRef = component}>
