@@ -5,6 +5,7 @@ import {
     Platform,
     StyleSheet,
     View,
+    Keyboard
 } from 'react-native';
 
 import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard'
@@ -96,8 +97,11 @@ class GiftedChat extends React.Component {
             showEmoji: true,
             messagesContainerHeight: this.getKeyboardHeight() === 0 ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight
         });
-        // this.getKeyboardHeight() > 0 ? Keyboard.dismiss() : null;
-        this.getKeyboardHeight() > 0 ? dismissKeyboard() : null;
+        if (Keyboard.dismiss) {
+            this.getKeyboardHeight() > 0 ? Keyboard.dismiss() : null;
+        }else{
+            this.getKeyboardHeight() > 0 ? dismissKeyboard() : null;
+        }
         console.log('changeEmoji->after:' + this.state.messagesContainerHeight);
 
         console.log('showEmoji:' + this.state.showEmoji);
