@@ -5,8 +5,9 @@ import {
     Platform,
     StyleSheet,
     View,
-    Keyboard
 } from 'react-native';
+
+import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard'
 
 import ActionSheet from '@exponent/react-native-action-sheet';
 import moment from 'moment/min/moment-with-locales.min';
@@ -30,6 +31,7 @@ import GiftedAvatar from './GiftedAvatar';
 import ActionsRight from './ActionsRight';
 import ClarifyBar from './ClarifyBar'
 import IconButton from './IconButton'
+
 
 // Min and max heights of ToolbarInput and Composer
 // Needed for Composer auto grow and ScrollView animation
@@ -94,7 +96,8 @@ class GiftedChat extends React.Component {
             showEmoji: true,
             messagesContainerHeight: this.getKeyboardHeight() === 0 ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight
         });
-        this.getKeyboardHeight() > 0 ? Keyboard.dismiss() : null;
+        // this.getKeyboardHeight() > 0 ? Keyboard.dismiss() : null;
+        this.getKeyboardHeight() > 0 ? dismissKeyboard() : null;
         console.log('changeEmoji->after:' + this.state.messagesContainerHeight);
 
         console.log('showEmoji:' + this.state.showEmoji);
