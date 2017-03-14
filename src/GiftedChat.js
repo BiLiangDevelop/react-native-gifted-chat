@@ -97,10 +97,14 @@ class GiftedChat extends React.Component {
             showEmoji: true,
             messagesContainerHeight: this.getKeyboardHeight() === 0 ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight
         });
-        if (Keyboard.dismiss) {
-            this.getKeyboardHeight() > 0 ? Keyboard.dismiss() : null;
+        if (this.getKeyboardHeight() > 0) {
+            if (Keyboard.dismiss) {
+                Keyboard.dismiss();
+            } else {
+                dismissKeyboard();
+            }
         }else{
-            this.getKeyboardHeight() > 0 ? dismissKeyboard() : null;
+            this.textInput.focus();
         }
         console.log('changeEmoji->after:' + this.state.messagesContainerHeight);
 
@@ -549,7 +553,7 @@ GiftedChat.defaultProps = {
     bottomOffset: 0,
     isLoadingEarlier: false,
     messageIdGenerator: () => uuid.v4(),
-    isFromClarify: true,
+    isFromClarify: false,
 };
 
 GiftedChat.propTypes = {
