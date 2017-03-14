@@ -195,7 +195,7 @@ export default class Example extends React.Component {
         return (
             <IconButton
                 onIconClick={()=>{
-                    this.refs.chat.changeEmoji();
+                    this.refs.chat.changeCustomMenu();
                 }}
                 textIcon='+'
             />

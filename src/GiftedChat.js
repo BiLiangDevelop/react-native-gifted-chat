@@ -90,8 +90,8 @@ class GiftedChat extends React.Component {
         };
     }
 
-    changeEmoji() {
-        console.log('changeEmoji->before:' + this.state.messagesContainerHeight);
+    changeCustomMenu() {
+        console.log('changeCustomMenu->before:' + this.state.messagesContainerHeight);
         const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset();
         let menuCurrentVisible = this.state.showCustomMenu;
         this.setState({
@@ -110,7 +110,7 @@ class GiftedChat extends React.Component {
             }
 
         }
-        console.log('changeEmoji->after:' + this.state.messagesContainerHeight);
+        console.log('changeCustomMenu->after:' + this.state.messagesContainerHeight);
 
         console.log('showCustomMenu:' + this.state.showCustomMenu);
     }
