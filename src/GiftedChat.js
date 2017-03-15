@@ -490,7 +490,9 @@ class GiftedChat extends React.Component {
 
     renderBottomBar() {
         return this.props.isFromClarify
-            ? (<ClarifyBar inputToolbar={this.renderInputToolbar()}/>)
+            ? (<ClarifyBar
+                {...this.props}
+                inputToolbar={this.renderInputToolbar()}/>)
             : this.renderInputToolbar()
     }
 
@@ -566,6 +568,12 @@ GiftedChat.defaultProps = {
     messageIdGenerator: () => uuid.v4(),
     isFromClarify: false,
     renderCustomMenu: null,
+    renderHoldToTalkButton: null,
+    renderAudioButton: null,
+    renderKeyboardButton: null,
+    renderMenuButton: null,
+    renderClarifyStateNormal: null,
+    renderClarifyStateInput: null,
 };
 
 GiftedChat.propTypes = {
@@ -600,7 +608,13 @@ GiftedChat.propTypes = {
     messageIdGenerator: React.PropTypes.func,
     keyboardShouldPersistTaps: React.PropTypes.oneOf(['always', 'never', 'handled']),
     isFromClarify: React.PropTypes.bool,//是否从澄清界面过来
-    renderCustomMenu: React.PropTypes.func,
+    renderCustomMenu: React.PropTypes.func,//底部自定义菜单
+    renderHoldToTalkButton: React.PropTypes.func,//按住说话
+    renderAudioButton: React.PropTypes.func,//语音按钮
+    renderKeyboardButton: React.PropTypes.func,//键盘按钮
+    renderMenuButton: React.PropTypes.func,//右边的菜单加号按钮
+    renderClarifyStateNormal: React.PropTypes.func,//澄清界面底部bar左边按钮，默认状态
+    renderClarifyStateInput: React.PropTypes.func,//澄清界面底部bar左边按钮，切换为输入框时状态
 };
 
 export {

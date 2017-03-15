@@ -12,11 +12,7 @@ import {
 export default class IconButton extends React.Component {
     render() {
         return (
-            <TouchableOpacity
-                onPress={() => {
-                    if (this.props.onIconClick)
-                        this.props.onIconClick();
-                }}
+            <View
                 style={styles.action}>
                 <View
                     style={styles.wrapper}
@@ -27,7 +23,7 @@ export default class IconButton extends React.Component {
                         {this.props.textIcon}
                     </Text>
                 </View>
-            </TouchableOpacity>
+            </View>
         )
     }
 }
@@ -42,9 +38,6 @@ const styles = StyleSheet.create({
     action: {
         width: 26,
         height: 26,
-        marginLeft: 10,
-        marginBottom: 10,
-        marginRight: 10,
     },
     iconText: {
         color: '#b2b2b2',

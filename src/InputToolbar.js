@@ -8,7 +8,6 @@ import {
 
 import Composer from './Composer';
 import Send from './Send';
-import Actions from './Actions';
 import ActionsRight from './ActionsRight';
 import RecordAudioBar from './RecordAudioBar'
 import IconButton from './IconButton'
@@ -21,15 +20,20 @@ export default class InputToolbar extends React.Component {
     }
 
     renderActions() {
-        return (
-            <IconButton
-                onIconClick={() => {
-                    this.setState({
-                        inputAudio: !this.state.inputAudio,
-                    })
-                }}
-                textIcon={this.state.inputAudio ? '+' : '-'}/>
-        )
+
+        if (this.props.renderAudioButton && this.props.renderKeyboardButton) {
+            return this.state.inputAudio ? this.props.renderKeyboardButton() : this.props.renderAudioButton();
+        } else {
+            return (
+                <IconButton
+                    onIconClick={() => {
+                        this.setState({
+                            inputAudio: !this.state.inputAudio,
+                        })
+                    }}
+                    textIcon={this.state.inputAudio ? '+' : '-'}/>
+            )
+        }
     }
 
     renderActionsRight() {
@@ -67,7 +71,9 @@ export default class InputToolbar extends React.Component {
 
     renderAudioBar() {
         return (
-            <RecordAudioBar />
+            <RecordAudioBar
+                renderHoldToTalkButton={this.props.renderHoldToTalkButton}
+            />
         )
     }
 
@@ -91,7 +97,13 @@ export default class InputToolbar extends React.Component {
             <View
                 style={[styles.container, this.props.containerStyle, {borderTopWidth: this.props.showBorderTop ? StyleSheet.hairlineWidth : 0}]}>
                 <View style={[styles.primary, this.props.primaryStyle]}>
-                    {this.renderActions()}
+                    <TouchableOpacity onPress={() => {
+                        this.setState({
+                            inputAudio: !this.state.inputAudio,
+                        })
+                    }}>
+                        {this.renderActions()}
+                    </TouchableOpacity>
                     {this.renderContentBar()}
                     {this.renderSend()}
                 </View>
@@ -108,7 +120,7 @@ const styles = StyleSheet.create({
     },
     primary: {
         flexDirection: 'row',
-        alignItems: 'flex-end',
+        alignItems: 'center',
     },
     accessory: {
         height: 44,
@@ -125,6 +137,10 @@ InputToolbar.defaultProps = {
     primaryStyle: {},
     accessoryStyle: {},
     showBorderTop: true,
+    renderAudioButton: null,
+    renderKeyboardButton: null,
+    renderMenuButton: null,
+    renderHoldToTalkButton: null,
 };
 
 InputToolbar.propTypes = {
@@ -138,5 +154,9 @@ InputToolbar.propTypes = {
     containerStyle: View.propTypes.style,
     primaryStyle: View.propTypes.style,
     accessoryStyle: View.propTypes.style,
-    showBorderTop: React.PropTypes.bool
+    showBorderTop: React.PropTypes.bool,
+    renderAudioButton: React.PropTypes.func,
+    renderKeyboardButton: React.PropTypes.func,
+    renderMenuButton: React.PropTypes.func,
+    renderHoldToTalkButton: React.PropTypes.func,
 };

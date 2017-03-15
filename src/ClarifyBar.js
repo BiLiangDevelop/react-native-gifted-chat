@@ -6,10 +6,8 @@ import {
     StyleSheet,
     View,
     Text,
-    TouchableOpacity,
-    Platform
+    TouchableOpacity
 } from 'react-native';
-import IconButton from './IconButton'
 
 export default class ClarifyBar extends React.Component {
 
@@ -30,13 +28,9 @@ export default class ClarifyBar extends React.Component {
                         })
                     }}
                     style={[styles.action]}>
-
-                    <View style={[styles.wrapper]}>
-                        <Text style={[styles.iconText]}>
-                            {this.state.showUserInput ? '+' : '-'}
-                        </Text>
+                    <View style={{flex: 1}}>
+                        {this.renderButtons()}
                     </View>
-
                 </TouchableOpacity>
 
                 <View style={{flex: 1}}>
@@ -45,6 +39,20 @@ export default class ClarifyBar extends React.Component {
 
             </View>
         )
+    }
+
+    renderButtons() {
+        if (this.props.renderClarifyStateInput && this.props.renderClarifyStateNormal) {
+            return this.state.showUserInput ? this.props.renderClarifyStateInput() : this.props.renderClarifyStateNormal();
+        } else {
+            return (
+                <View style={[styles.wrapper]}>
+                    <Text style={[styles.iconText]}>
+                        {this.state.showUserInput ? '+' : '-'}
+                    </Text>
+                </View>
+            )
+        }
     }
 
     renderClarifyBar() {
@@ -77,7 +85,6 @@ const styles = StyleSheet.create({
         borderRadius: 13,
         borderColor: '#b2b2b2',
         borderWidth: 2,
-        flex: 1
     },
     text: {
         borderLeftWidth: 1,
@@ -112,14 +119,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'center',
-        height: 41
+        height: 44
     }
 });
 
 ClarifyBar.defaultProps = {
     inputToolbar: null,
+    renderClarifyStateNormal: null,
+    renderClarifyStateInput: null,
 }
 
 ClarifyBar.propTypes = {
     inputToolbar: React.PropTypes.object,
+    renderClarifyStateNormal: React.PropTypes.func,
+    renderClarifyStateInput: React.PropTypes.func,
+
 }

@@ -4,7 +4,9 @@ import {
     StyleSheet,
     Text,
     View,
-    Keyboard
+    Keyboard,
+    Button,
+    TouchableOpacity
 } from 'react-native';
 
 import {GiftedChat, Actions, Bubble, ActionsRight, IconButton} from 'react-native-gifted-chat';
@@ -188,14 +190,52 @@ export default class Example extends React.Component {
                 renderFooter={this.renderFooter}
                 renderActionsRight={this.renderRightAction.bind(this)}
                 renderCustomMenu={this.renderCustomMenu.bind(this)}
+                isFromClarify={true}
+                renderHoldToTalkButton={this.renderHoldToTalk}
+                renderAudioButton={this.renderAudioButton}
+                renderKeyboardButton={this.renderKeyboardButton}
+                renderClarifyStateNormal={this.renderKeyboardButton}
+                renderClarifyStateInput={this.renderClarifyStateInput}
             />
         );
     }
 
-    renderCustomMenu(props){
+    renderHoldToTalk() {
+        return (
+            <Button title='按住说话' onPress={() => {
+                console.log('on press')
+            }}/>
+        )
+    }
+
+    renderAudioButton() {
         return (
             <IconButton
-                onIconClick={()=>{
+                textIcon=')))'
+            />
+        );
+    }
+
+    renderClarifyStateInput() {
+        return (
+            <IconButton
+                textIcon='6'
+            />
+        );
+    }
+
+    renderKeyboardButton() {
+        return (
+            <IconButton
+                textIcon='三'
+            />
+        );
+    }
+
+    renderCustomMenu(props) {
+        return (
+            <IconButton
+                onIconClick={() => {
                     this.refs.chat.hideCustomMenu();
                 }}
                 textIcon='+'
@@ -205,12 +245,17 @@ export default class Example extends React.Component {
 
     renderRightAction(props) {
         return (
-            <IconButton
-                onIconClick={()=>{
+            <TouchableOpacity
+                onPress={() => {
                     this.refs.chat.changeCustomMenu();
                 }}
-                textIcon='+'
-            />
+                style={{marginRight:8}}
+            >
+                <IconButton
+                    textIcon='+'
+                />
+            </TouchableOpacity>
+
         );
     }
 }

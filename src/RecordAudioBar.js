@@ -14,22 +14,31 @@ import {
 export default class RecordAudioBar extends React.Component {
     render() {
         return (
-            <TouchableOpacity style={styles.container}>
-                <View style={[styles.text, {height: this.props.composerHeight}]}>
-                    <Text >
-                        按住说话
-                    </Text>
+            <TouchableOpacity style={[styles.container]}>
+                <View style={[{height: this.props.composerHeight}]}>
+                    {this.renderHoldToTalk()}
                 </View>
             </TouchableOpacity>
         )
+    }
+
+    renderHoldToTalk() {
+        if (this.props.renderHoldToTalkButton) {
+            return this.props.renderHoldToTalkButton();
+        } else {
+            return (
+                <Text style={styles.text}>
+                    按住说话
+                </Text>
+            )
+        }
+        return null;
     }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
     text: {
         borderWidth: 1,
@@ -43,13 +52,17 @@ const styles = StyleSheet.create({
             ios: 6,
             android: 6,
         }),
+        alignSelf: 'center',
+        flex: 1
     }
 })
 
 RecordAudioBar.defaultProps = {
-    composerHeight: Platform.select({
-        ios: 33,
-        android: 33,
-    }),
+    composerHeight: 44,
+    renderHoldToTalkButton: null,
 
+}
+
+RecordAudioBar.propTypes = {
+    renderHoldToTalkButton: React.PropTypes.func,
 }
