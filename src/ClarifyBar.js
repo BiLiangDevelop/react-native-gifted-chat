@@ -28,7 +28,7 @@ export default class ClarifyBar extends React.Component {
                         })
                     }}
                     style={[styles.action]}>
-                    <View style={{flex: 1}}>
+                    <View style={{flex: 1, justifyContent: 'center'}}>
                         {this.renderButtons()}
                     </View>
                 </TouchableOpacity>
@@ -93,8 +93,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     action: {
-        width: 26,
-        height: 26,
         marginLeft: 10,
         marginRight: 10,
     },
