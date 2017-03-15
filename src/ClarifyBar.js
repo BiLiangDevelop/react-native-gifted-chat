@@ -26,6 +26,9 @@ export default class ClarifyBar extends React.Component {
                         this.setState({
                             showUserInput: !this.state.showUserInput,
                         })
+                        if (this.props.hideBottomMenu) {
+                            this.props.hideBottomMenu();
+                        }
                     }}
                     style={[styles.action]}>
                     <View style={{flex: 1, justifyContent: 'center'}}>
@@ -125,11 +128,13 @@ ClarifyBar.defaultProps = {
     inputToolbar: null,
     renderClarifyStateNormal: null,
     renderClarifyStateInput: null,
+    hideBottomMenu: null,
 }
 
 ClarifyBar.propTypes = {
     inputToolbar: React.PropTypes.object,
     renderClarifyStateNormal: React.PropTypes.func,
     renderClarifyStateInput: React.PropTypes.func,
+    hideBottomMenu: React.PropTypes.func,
 
 }

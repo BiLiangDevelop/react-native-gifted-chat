@@ -492,6 +492,7 @@ class GiftedChat extends React.Component {
         return this.props.isFromClarify
             ? (<ClarifyBar
                 {...this.props}
+                hideBottomMenu={this.hideCustomMenu.bind(this)}
                 inputToolbar={this.renderInputToolbar()}/>)
             : this.renderInputToolbar()
     }
