@@ -101,6 +101,9 @@ export default class InputToolbar extends React.Component {
                         this.setState({
                             inputAudio: !this.state.inputAudio,
                         })
+                        if(this.props.hideBottomMenu){
+                            this.props.hideBottomMenu();
+                        }
                     }}>
                         {this.renderActions()}
                     </TouchableOpacity>
@@ -141,6 +144,7 @@ InputToolbar.defaultProps = {
     renderKeyboardButton: null,
     renderMenuButton: null,
     renderHoldToTalkButton: null,
+    hideBottomMenu: null,
 };
 
 InputToolbar.propTypes = {
@@ -159,4 +163,5 @@ InputToolbar.propTypes = {
     renderKeyboardButton: React.PropTypes.func,
     renderMenuButton: React.PropTypes.func,
     renderHoldToTalkButton: React.PropTypes.func,
+    hideBottomMenu: React.PropTypes.func,
 };

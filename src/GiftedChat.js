@@ -461,6 +461,7 @@ class GiftedChat extends React.Component {
         return (
             <InputToolbar
                 {...inputToolbarProps}
+                hideBottomMenu={this.hideCustomMenu.bind(this)}
             />
         );
     }
