@@ -196,6 +196,7 @@ export default class Example extends React.Component {
                 renderKeyboardButton={this.renderKeyboardButton}
                 renderClarifyStateNormal={this.renderKeyboardButton}
                 renderClarifyStateInput={this.renderClarifyStateInput}
+                customMenuHeight={200}
             />
         );
     }

@@ -99,7 +99,7 @@ class GiftedChat extends React.Component {
         let menuCurrentVisible = this.state.showCustomMenu;
         this.setState({
             showCustomMenu: true,
-            messagesContainerHeight: this.getKeyboardHeight() === 0 ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight,
+            messagesContainerHeight: this.getKeyboardHeight() === 0 ? newMessagesContainerHeight - this.props.customMenuHeight : this.state.messagesContainerHeight,
             typingDisabled: false
         });
         if (this.getKeyboardHeight() > 0) {
@@ -124,7 +124,7 @@ class GiftedChat extends React.Component {
     hideCustomMenu() {
         this.setState({
             showCustomMenu: false,
-            messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight
+            messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + this.props.customMenuHeight : this.state.messagesContainerHeight
         });
     }
 
@@ -260,7 +260,7 @@ class GiftedChat extends React.Component {
     onKeyboardWillShow(e) {
         this.setState({
             showCustomMenu: false,
-            messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + DEFAULT_EMOJI_HEIGHT : this.state.messagesContainerHeight
+            messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + this.props.customMenuHeight : this.state.messagesContainerHeight
         });
         this.setIsTypingDisabled(true);
         this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
@@ -292,7 +292,7 @@ class GiftedChat extends React.Component {
         //         duration: 210,
         //     }).start();
         // } else {
-        let height = this.state.showCustomMenu ? newMessagesContainerHeight - DEFAULT_EMOJI_HEIGHT : newMessagesContainerHeight;
+        let height = this.state.showCustomMenu ? newMessagesContainerHeight - this.props.customMenuHeight : newMessagesContainerHeight;
         this.setState({
             messagesContainerHeight: height,
         });
@@ -577,6 +577,7 @@ GiftedChat.defaultProps = {
     renderClarifyStateNormal: null,
     renderClarifyStateInput: null,
     renderClarifyItems: null,
+    customMenuHeight: DEFAULT_EMOJI_HEIGHT,
 };
 
 GiftedChat.propTypes = {
@@ -619,6 +620,7 @@ GiftedChat.propTypes = {
     renderClarifyStateNormal: React.PropTypes.func,//澄清界面底部bar左边按钮，默认状态
     renderClarifyStateInput: React.PropTypes.func,//澄清界面底部bar左边按钮，切换为输入框时状态
     renderClarifyItems: React.PropTypes.func,//澄清界面底部bar的动态按钮项
+    customMenuHeight: React.PropTypes.number,//澄清界面底部bar的动态按钮项
 };
 
 export {
