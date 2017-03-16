@@ -101,8 +101,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     action: {
-        marginLeft: 10,
-        marginRight: 10,
     },
     iconText: {
         color: '#b2b2b2',

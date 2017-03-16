@@ -196,14 +196,13 @@ export default class Example extends React.Component {
                 renderKeyboardButton={this.renderKeyboardButton}
                 renderClarifyStateNormal={this.renderKeyboardButton}
                 renderClarifyStateInput={this.renderClarifyStateInput}
-                renderClarifyItems={this.renderClarifyItems.bind(this)}
             />
         );
     }
 
     renderClarifyItems() {
         return (
-            <View style={styles.clarifyContainer}>
+            <View style={[styles.clarifyContainer]}>
 
                 <View style={styles.line}>
                     <View style={[styles.line, {flex: 1, borderLeftWidth: 0.3,}]}>
