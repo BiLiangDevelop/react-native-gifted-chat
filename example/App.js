@@ -196,8 +196,44 @@ export default class Example extends React.Component {
                 renderKeyboardButton={this.renderKeyboardButton}
                 renderClarifyStateNormal={this.renderKeyboardButton}
                 renderClarifyStateInput={this.renderClarifyStateInput}
+                renderClarifyItems={this.renderClarifyItems.bind(this)}
             />
         );
+    }
+
+    renderClarifyItems() {
+        return (
+            <View style={styles.clarifyContainer}>
+
+                <View style={styles.line}>
+                    <View style={[styles.line, {flex: 1, borderLeftWidth: 0.3,}]}>
+                    </View>
+                </View>
+
+                <TouchableOpacity style={styles.clarifyItem}>
+                    <IconButton
+                        textIcon='-'
+                    />
+                    <Text style={styles.clarifyText}>
+                        服务
+                    </Text>
+                </TouchableOpacity>
+
+                <View style={styles.line}>
+                    <View style={[styles.line, {flex: 1, borderLeftWidth: 0.3,}]}>
+                    </View>
+                </View>
+
+                <TouchableOpacity style={styles.clarifyItem}>
+                    <IconButton
+                        textIcon='-'
+                    />
+                    <Text style={styles.clarifyText}>
+                        我的
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        )
     }
 
     renderHoldToTalk() {
@@ -249,7 +285,7 @@ export default class Example extends React.Component {
                 onPress={() => {
                     this.refs.chat.changeCustomMenu();
                 }}
-                style={{marginRight:8}}
+                style={{marginRight: 8}}
             >
                 <IconButton
                     textIcon='+'
@@ -271,4 +307,23 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#aaa',
     },
+    clarifyContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        flex: 1,
+    },
+    clarifyItem: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    line: {
+        borderLeftColor: 'rgba(0,0,0,0.8)',
+    },
+    clarifyText: {
+        fontSize: 16,
+        padding: 8,
+    }
+
 });

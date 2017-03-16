@@ -576,6 +576,7 @@ GiftedChat.defaultProps = {
     renderMenuButton: null,
     renderClarifyStateNormal: null,
     renderClarifyStateInput: null,
+    renderClarifyItems: null,
 };
 
 GiftedChat.propTypes = {
@@ -617,6 +618,7 @@ GiftedChat.propTypes = {
     renderMenuButton: React.PropTypes.func,//右边的菜单加号按钮
     renderClarifyStateNormal: React.PropTypes.func,//澄清界面底部bar左边按钮，默认状态
     renderClarifyStateInput: React.PropTypes.func,//澄清界面底部bar左边按钮，切换为输入框时状态
+    renderClarifyItems: React.PropTypes.func,//澄清界面底部bar的动态按钮项
 };
 
 export {

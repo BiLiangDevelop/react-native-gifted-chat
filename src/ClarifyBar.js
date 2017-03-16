@@ -59,6 +59,11 @@ export default class ClarifyBar extends React.Component {
     }
 
     renderClarifyBar() {
+
+        if (this.props.renderClarifyItems) {
+            return this.props.renderClarifyItems();
+        }
+
         return (
             <View style={styles.textContainer}>
 
@@ -129,6 +134,7 @@ ClarifyBar.defaultProps = {
     renderClarifyStateNormal: null,
     renderClarifyStateInput: null,
     hideBottomMenu: null,
+    renderClarifyItems: null,
 }
 
 ClarifyBar.propTypes = {
@@ -136,5 +142,6 @@ ClarifyBar.propTypes = {
     renderClarifyStateNormal: React.PropTypes.func,
     renderClarifyStateInput: React.PropTypes.func,
     hideBottomMenu: React.PropTypes.func,
+    renderClarifyItems: React.PropTypes.func,
 
 }
