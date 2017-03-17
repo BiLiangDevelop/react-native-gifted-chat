@@ -147,7 +147,6 @@ export default class MessageContainer extends React.Component {
           {...this.props.listViewProps}
 
           dataSource={this.state.dataSource}
-
           renderRow={this.renderRow}
           renderHeader={this.renderFooter}
           renderFooter={this.renderLoadEarlier}
