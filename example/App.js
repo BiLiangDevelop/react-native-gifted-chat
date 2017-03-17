@@ -6,12 +6,14 @@ import {
     View,
     Keyboard,
     Button,
-    TouchableOpacity
+    TouchableOpacity,
+    TextInput
 } from 'react-native';
 
 import {GiftedChat, Actions, Bubble, ActionsRight, IconButton} from 'react-native-gifted-chat';
 import CustomActions from './CustomActions';
 import CustomView from './CustomView';
+import Composer from './Composer'
 
 export default class Example extends React.Component {
     constructor(props) {
@@ -196,9 +198,18 @@ export default class Example extends React.Component {
                 renderKeyboardButton={this.renderKeyboardButton}
                 renderClarifyStateNormal={this.renderKeyboardButton}
                 renderClarifyStateInput={this.renderClarifyStateInput}
+                renderComposer={this.renderComposer}
                 customMenuHeight={200}
             />
         );
+    }
+
+    renderComposer(props) {
+        return (
+            <Composer
+                {...props}
+            />
+        )
     }
 
     renderClarifyItems() {
@@ -324,6 +335,19 @@ const styles = StyleSheet.create({
     clarifyText: {
         fontSize: 16,
         padding: 8,
-    }
+    },
+    textInput: {
+        flex: 1,
+        fontSize: 16,
+        lineHeight: 16,
+        marginTop: Platform.select({
+            ios: 6,
+            android: 0,
+        }),
+        marginBottom: Platform.select({
+            ios: 5,
+            android: 3,
+        }),
+    },
 
 });
