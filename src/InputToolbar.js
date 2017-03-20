@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     accessory: {
-        height: 44,
+        height: 50,
     },
 });
 

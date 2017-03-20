@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'center',
-        height: 44
+        height: 50
     }
 });
 

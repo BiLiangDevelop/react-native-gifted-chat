@@ -38,11 +38,11 @@ import IconButton from './IconButton'
 // Needed for Composer auto grow and ScrollView animation
 // TODO move these values to Constants.js (also with used colors #b2b2b2)
 const MIN_COMPOSER_HEIGHT = Platform.select({
-    ios: 33,
-    android: 41,
+    ios: 39,
+    android: 47,
 });
 const MAX_COMPOSER_HEIGHT = 100;
-const MIN_INPUT_TOOLBAR_HEIGHT = 44;
+const MIN_INPUT_TOOLBAR_HEIGHT = 50;
 
 var DEFAULT_EMOJI_HEIGHT = Platform.select({
     ios: 250 / 2,
