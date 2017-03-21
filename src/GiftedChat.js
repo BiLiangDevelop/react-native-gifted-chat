@@ -575,6 +575,8 @@ GiftedChat.defaultProps = {
     renderClarifyStateInput: null,
     renderClarifyItems: null,
     customMenuHeight: DEFAULT_EMOJI_HEIGHT,
+    initialListSize: 10,
+    pageSize: 10,
 };
 
 GiftedChat.propTypes = {
@@ -617,7 +619,9 @@ GiftedChat.propTypes = {
     renderClarifyStateNormal: React.PropTypes.func,//澄清界面底部bar左边按钮，默认状态
     renderClarifyStateInput: React.PropTypes.func,//澄清界面底部bar左边按钮，切换为输入框时状态
     renderClarifyItems: React.PropTypes.func,//澄清界面底部bar的动态按钮项
-    customMenuHeight: React.PropTypes.number,//澄清界面底部bar的动态按钮项
+    customMenuHeight: React.PropTypes.number,//自定义菜单高度
+    initialListSize: React.PropTypes.number,//聊天内容初始化列表Size
+    pageSize: React.PropTypes.number,//每页Size
 };
 
 export {
