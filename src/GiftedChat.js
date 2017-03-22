@@ -50,6 +50,8 @@ var DEFAULT_EMOJI_HEIGHT = Platform.select({
 });
 ;
 
+var bottomMenuShowing = false;
+
 class GiftedChat extends React.Component {
     constructor(props) {
         super(props);
@@ -119,6 +121,7 @@ class GiftedChat extends React.Component {
             }
 
         }
+        bottomMenuShowing = true;
     }
 
     hideCustomMenu() {
@@ -126,6 +129,7 @@ class GiftedChat extends React.Component {
             showCustomMenu: false,
             messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + this.props.customMenuHeight : this.state.messagesContainerHeight
         });
+        bottomMenuShowing = false;
     }
 
     static append(currentMessages = [], messages) {
@@ -335,6 +339,7 @@ class GiftedChat extends React.Component {
 
                     ref={component => this._messageContainerRef = component}
                     pressContainer={this.hideCustomMenu.bind(this)}
+                    handleTouch={bottomMenuShowing}
                 />
                 {this.renderChatFooter()}
             </AnimatedView>

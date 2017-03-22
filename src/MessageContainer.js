@@ -137,7 +137,7 @@ export default class MessageContainer extends React.Component {
 
     render() {
         return (
-            <View ref='container' style={{flex: 1}} onStartShouldSetResponder={(evt)=>{return true}} onResponderStart={(evt)=>{
+            <View ref='container' style={{flex: 1}} onStartShouldSetResponder={(evt)=>{return this.props.handleTouch}} onResponderStart={(evt)=>{
                 this.props.pressContainer?this.props.pressContainer():null;
             }}>
                 <ListView
@@ -170,6 +170,7 @@ MessageContainer.defaultProps = {
     initialListSize: 10,
     pageSize: 10,
     pressContainer:null,
+    handleTouch:false,
 };
 
 MessageContainer.propTypes = {
@@ -182,4 +183,5 @@ MessageContainer.propTypes = {
     initialListSize: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     pressContainer: React.PropTypes.func,
+    handleTouch: React.PropTypes.bool,
 };
