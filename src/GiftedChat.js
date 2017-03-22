@@ -334,6 +334,7 @@ class GiftedChat extends React.Component {
                     messages={this.getMessages()}
 
                     ref={component => this._messageContainerRef = component}
+                    pressContainer={this.hideCustomMenu.bind(this)}
                 />
                 {this.renderChatFooter()}
             </AnimatedView>

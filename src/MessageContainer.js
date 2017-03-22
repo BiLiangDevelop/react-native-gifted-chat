@@ -137,7 +137,9 @@ export default class MessageContainer extends React.Component {
 
     render() {
         return (
-            <View ref='container' style={{flex: 1}}>
+            <View ref='container' style={{flex: 1}} onStartShouldSetResponder={(evt)=>{return true}} onResponderStart={(evt)=>{
+                this.props.pressContainer?this.props.pressContainer():null;
+            }}>
                 <ListView
                     enableEmptySections={true}
                     automaticallyAdjustContentInsets={false}
@@ -167,6 +169,7 @@ MessageContainer.defaultProps = {
     },
     initialListSize: 10,
     pageSize: 10,
+    pressContainer:null,
 };
 
 MessageContainer.propTypes = {
@@ -178,4 +181,5 @@ MessageContainer.propTypes = {
     listViewProps: React.PropTypes.object,
     initialListSize: React.PropTypes.number,
     pageSize: React.PropTypes.number,
+    pressContainer: React.PropTypes.func,
 };
