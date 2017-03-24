@@ -23,12 +23,12 @@ export default class ClarifyBar extends React.Component {
             <View style={[styles.container, styles.primary]}>
                 <TouchableOpacity
                     onPress={() => {
-                        this.setState({
-                            showUserInput: !this.state.showUserInput,
-                        })
                         if (this.props.hideBottomMenu) {
                             this.props.hideBottomMenu();
                         }
+                        this.setState({
+                            showUserInput: !this.state.showUserInput,
+                        })
                     }}
                     style={[styles.action]}>
                     <View style={{flex: 1, justifyContent: 'center'}}>
