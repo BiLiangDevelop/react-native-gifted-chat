@@ -125,8 +125,6 @@ class GiftedChat extends React.Component {
     }
 
     hideCustomMenu() {
-        if (this.props.itemWillChange)
-            this.props.itemWillChange();
         this.setState({
             showCustomMenu: false,
             messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + this.props.customMenuHeight : this.state.messagesContainerHeight

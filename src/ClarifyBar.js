@@ -26,6 +26,8 @@ export default class ClarifyBar extends React.Component {
                         if (this.props.hideBottomMenu) {
                             this.props.hideBottomMenu();
                         }
+                        if (this.props.itemWillChange)
+                            this.props.itemWillChange();
                         this.setState({
                             showUserInput: !this.state.showUserInput,
                         })
@@ -133,6 +135,7 @@ ClarifyBar.defaultProps = {
     renderClarifyStateInput: null,
     hideBottomMenu: null,
     renderClarifyItems: null,
+    itemWillChange: null,
 }
 
 ClarifyBar.propTypes = {
@@ -141,5 +144,6 @@ ClarifyBar.propTypes = {
     renderClarifyStateInput: React.PropTypes.func,
     hideBottomMenu: React.PropTypes.func,
     renderClarifyItems: React.PropTypes.func,
+    itemWillChange: React.PropTypes.func,
 
 }
