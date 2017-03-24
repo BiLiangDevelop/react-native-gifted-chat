@@ -125,6 +125,8 @@ class GiftedChat extends React.Component {
     }
 
     hideCustomMenu() {
+        if (this.props.itemWillChange)
+            this.props.itemWillChange();
         this.setState({
             showCustomMenu: false,
             messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + this.props.customMenuHeight : this.state.messagesContainerHeight
@@ -583,6 +585,7 @@ GiftedChat.defaultProps = {
     customMenuHeight: DEFAULT_EMOJI_HEIGHT,
     initialListSize: 10,
     pageSize: 10,
+    itemWillChange: null,
 };
 
 GiftedChat.propTypes = {
@@ -628,6 +631,7 @@ GiftedChat.propTypes = {
     customMenuHeight: React.PropTypes.number,//自定义菜单高度
     initialListSize: React.PropTypes.number,//聊天内容初始化列表Size
     pageSize: React.PropTypes.number,//每页Size
+    itemWillChange: React.PropTypes.func,
 };
 
 export {
