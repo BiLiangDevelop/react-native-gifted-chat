@@ -41,7 +41,10 @@ const MIN_COMPOSER_HEIGHT = Platform.select({
     ios: 39,
     android: 47,
 });
-const MAX_COMPOSER_HEIGHT = 100;
+const MAX_COMPOSER_HEIGHT = Platform.select({
+    ios: 39,
+    android: 47,
+});
 const MIN_INPUT_TOOLBAR_HEIGHT = 50;
 
 var DEFAULT_EMOJI_HEIGHT = Platform.select({
@@ -528,6 +531,7 @@ class GiftedChat extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor:'#bbbbbb',
     }
 });
 
