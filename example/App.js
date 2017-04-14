@@ -200,6 +200,7 @@ export default class Example extends React.Component {
                 renderClarifyStateInput={this.renderClarifyStateInput}
                 renderComposer={this.renderComposer}
                 customMenuHeight={200}
+                hideInputBar={true}
             />
         );
     }

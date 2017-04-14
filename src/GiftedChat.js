@@ -425,7 +425,7 @@ class GiftedChat extends React.Component {
                 isInitialized: true,
                 text: '',
                 composerHeight: MIN_COMPOSER_HEIGHT,
-                messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight()),
+                messagesContainerHeight: this.prepareMessagesContainerHeight(this.props.hideInputBar ? this.getMaxHeight() : this.getMaxHeight() - this.getMinInputToolbarHeight()),
             });
         });
     }
@@ -513,7 +513,7 @@ class GiftedChat extends React.Component {
                 <ActionSheet ref={component => this._actionSheetRef = component}>
                     <View style={styles.container} onLayout={this.onMainViewLayout}>
                         {this.renderMessages()}
-                        {this.renderBottomBar()}
+                        {this.props.hideInputBar ? null : this.renderBottomBar()}
                         {this.renderEmoji()}
                     </View>
                 </ActionSheet>
@@ -586,7 +586,9 @@ GiftedChat.defaultProps = {
     customMenuHeight: DEFAULT_EMOJI_HEIGHT,
     initialListSize: 10,
     pageSize: 10,
-};
+    hideInputBar: false,
+}
+;
 
 GiftedChat.propTypes = {
     messages: React.PropTypes.array,
@@ -631,6 +633,7 @@ GiftedChat.propTypes = {
     customMenuHeight: React.PropTypes.number,//自定义菜单高度
     initialListSize: React.PropTypes.number,//聊天内容初始化列表Size
     pageSize: React.PropTypes.number,//每页Size
+    hideInputBar: React.PropTypes.bool,
 };
 
 export {
