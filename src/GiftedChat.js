@@ -587,6 +587,7 @@ GiftedChat.defaultProps = {
     initialListSize: 10,
     pageSize: 10,
     hideInputBar: false,
+    renderSnapChatBtn:null,
 }
 ;
 
@@ -633,7 +634,8 @@ GiftedChat.propTypes = {
     customMenuHeight: React.PropTypes.number,//自定义菜单高度
     initialListSize: React.PropTypes.number,//聊天内容初始化列表Size
     pageSize: React.PropTypes.number,//每页Size
-    hideInputBar: React.PropTypes.bool,
+    hideInputBar: React.PropTypes.bool,//是否隐藏底部输入bar
+    renderSnapChatBtn: React.PropTypes.func,//渲染snapChat 按钮
 };
 
 export {

@@ -95,6 +95,13 @@ export default class InputToolbar extends React.Component {
         return null;
     }
 
+    renderSnapChatBtn(){
+        if(this.props.renderSnapChatBtn){
+            return this.props.renderSnapChatBtn();
+        }
+        return null;
+    }
+
     render() {
         return (
             <View
@@ -111,6 +118,7 @@ export default class InputToolbar extends React.Component {
                         {this.renderActions()}
                     </TouchableOpacity>
                     {this.renderContentBar()}
+                    {this.renderSnapChatBtn()}
                     {this.renderSend()}
                 </View>
                 {this.renderAccessory()}
@@ -148,6 +156,7 @@ InputToolbar.defaultProps = {
     renderMenuButton: null,
     renderHoldToTalkButton: null,
     hideBottomMenu: null,
+    renderSnapChatBtn:null,
 };
 
 InputToolbar.propTypes = {
@@ -167,4 +176,5 @@ InputToolbar.propTypes = {
     renderMenuButton: React.PropTypes.func,
     renderHoldToTalkButton: React.PropTypes.func,
     hideBottomMenu: React.PropTypes.func,
+    renderSnapChatBtn: React.PropTypes.func,
 };

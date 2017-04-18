@@ -192,7 +192,6 @@ export default class Example extends React.Component {
                 renderFooter={this.renderFooter}
                 renderActionsRight={this.renderRightAction.bind(this)}
                 renderCustomMenu={this.renderCustomMenu.bind(this)}
-                isFromClarify={true}
                 renderHoldToTalkButton={this.renderHoldToTalk}
                 renderAudioButton={this.renderAudioButton}
                 renderKeyboardButton={this.renderKeyboardButton}
@@ -200,9 +199,13 @@ export default class Example extends React.Component {
                 renderClarifyStateInput={this.renderClarifyStateInput}
                 renderComposer={this.renderComposer}
                 customMenuHeight={200}
-                hideInputBar={true}
+                renderSnapChatBtn={this.renderSnapChatBtn.bind(this)}
             />
         );
+    }
+
+    renderSnapChatBtn(){
+        return this.renderClarifyStateInput();
     }
 
     renderComposer(props) {
