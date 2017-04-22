@@ -132,7 +132,7 @@ class GiftedChat extends React.Component {
     hideCustomMenu() {
         this.setState({
             showCustomMenu: false,
-            messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + this.props.customMenuHeight : this.state.messagesContainerHeight
+            messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + this.props.customMenuHeight - (this.show ? this.props.snapChatSlideBarHeight + this.state.composerHeight : 0) : this.state.messagesContainerHeight
         });
         bottomMenuShowing = false;
     }
@@ -290,14 +290,14 @@ class GiftedChat extends React.Component {
         // }
     }
 
-    onShowSnapChat(show){
+    onShowSnapChat(show) {
         this.show = show;
         const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset();
-        if(show){
+        if (show) {
             this.setState({
                 messagesContainerHeight: newMessagesContainerHeight - this.props.snapChatSlideBarHeight,
             });
-        }else{
+        } else {
             this.setState({
                 messagesContainerHeight: this.state.messagesContainerHeight + this.props.snapChatSlideBarHeight,
             });
@@ -607,7 +607,7 @@ GiftedChat.defaultProps = {
     renderSnapChatBtn: null,
     renderSnapChatSlideBar: null,
     snapChatSlideBarHeight: 50,
-    snapChatModel:false,
+    snapChatModel: false,
 }
 ;
 
