@@ -23,6 +23,7 @@ export default class Example extends React.Component {
             loadEarlier: true,
             typingText: null,
             isLoadingEarlier: false,
+            showSlideBar: false,
         };
 
         this._isMounted = false;
@@ -34,6 +35,7 @@ export default class Example extends React.Component {
         this.onLoadEarlier = this.onLoadEarlier.bind(this);
 
         this._isAlright = null;
+        this.show = false;
     }
 
     componentWillMount() {
@@ -192,7 +194,7 @@ export default class Example extends React.Component {
                 renderFooter={this.renderFooter}
                 renderActionsRight={this.renderRightAction.bind(this)}
                 renderCustomMenu={this.renderCustomMenu.bind(this)}
-                renderHoldToTalkButton={this.renderHoldToTalk}
+                renderHoldToTalkButton={this.renderHoldToTalk.bind(this)}
                 renderAudioButton={this.renderAudioButton}
                 renderKeyboardButton={this.renderKeyboardButton}
                 renderClarifyStateNormal={this.renderKeyboardButton}
@@ -205,15 +207,15 @@ export default class Example extends React.Component {
         );
     }
 
-    renderSnapChatSlideBar(){
+    renderSnapChatSlideBar() {
         return (
-            <View style={{backgroundColor:'red',height:50}}>
+            <View style={{backgroundColor: 'red', height: 50}}>
 
             </View>
         )
     }
 
-    renderSnapChatBtn(){
+    renderSnapChatBtn() {
         return this.renderClarifyStateInput();
     }
 
@@ -264,6 +266,8 @@ export default class Example extends React.Component {
         return (
             <Button title='按住说话' onPress={() => {
                 console.log('on press')
+                this.refs.chat.onShowSnapChat(!this.show);
+                this.show = !this.show;
             }}/>
         )
     }
