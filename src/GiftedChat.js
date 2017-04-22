@@ -132,7 +132,7 @@ class GiftedChat extends React.Component {
     hideCustomMenu() {
         this.setState({
             showCustomMenu: false,
-            messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + this.props.customMenuHeight - (this.show ? this.props.snapChatSlideBarHeight + this.state.composerHeight+this.getBottomOffset() : 0) : this.state.messagesContainerHeight
+            messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + this.props.customMenuHeight - (this.show ? this.props.snapChatSlideBarHeight + this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT) : 0) : this.state.messagesContainerHeight
         });
         bottomMenuShowing = false;
     }
