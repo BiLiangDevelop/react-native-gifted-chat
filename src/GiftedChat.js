@@ -274,7 +274,7 @@ class GiftedChat extends React.Component {
         //打开后可跟键盘高度一样高
         // DEFAULT_EMOJI_HEIGHT = this.getKeyboardHeight();
         this.setBottomOffset(this.props.bottomOffset);
-        const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset();
+        const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset() - (this.props.renderSnapChatSlideBar ? this.props.snapChatSlideBarHeight : 0);
         // if (this.props.isAnimated === true) {
         //     Animated.timing(this.state.messagesContainerHeight, {
         //         toValue: newMessagesContainerHeight,
@@ -292,7 +292,7 @@ class GiftedChat extends React.Component {
         this.setIsTypingDisabled(true);
         this.setKeyboardHeight(0);
         this.setBottomOffset(0);
-        const newMessagesContainerHeight = this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT));
+        const newMessagesContainerHeight = this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT) + (this.props.renderSnapChatSlideBar ? this.props.snapChatSlideBarHeight : 0));
         // if (this.props.isAnimated === true) {
         //     Animated.timing(this.state.messagesContainerHeight, {
         //         toValue: newMessagesContainerHeight,
@@ -387,7 +387,7 @@ class GiftedChat extends React.Component {
         this.setState({
             text: '',
             composerHeight: MIN_COMPOSER_HEIGHT,
-            messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight() - this.getKeyboardHeight() + this.props.bottomOffset),
+            messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight() - this.getKeyboardHeight() + this.props.bottomOffset - (this.props.renderSnapChatSlideBar ? this.props.snapChatSlideBarHeight : 0)),
         });
     }
 
@@ -400,7 +400,7 @@ class GiftedChat extends React.Component {
         const newMessagesContainerHeight = this.getMaxHeight() - this.calculateInputToolbarHeight(newComposerHeight) - this.getKeyboardHeight() + this.getBottomOffset();
         this.setState({
             composerHeight: newComposerHeight,
-            messagesContainerHeight: this.prepareMessagesContainerHeight(newMessagesContainerHeight),
+            messagesContainerHeight: this.prepareMessagesContainerHeight(newMessagesContainerHeight - (this.props.renderSnapChatSlideBar ? this.props.snapChatSlideBarHeight : 0)),
         });
     }
 
@@ -425,7 +425,7 @@ class GiftedChat extends React.Component {
                 isInitialized: true,
                 text: '',
                 composerHeight: MIN_COMPOSER_HEIGHT,
-                messagesContainerHeight: this.prepareMessagesContainerHeight(this.props.hideInputBar ? this.getMaxHeight() : this.getMaxHeight() - this.getMinInputToolbarHeight()),
+                messagesContainerHeight: this.prepareMessagesContainerHeight(this.props.hideInputBar ? this.getMaxHeight() : this.getMaxHeight() - this.getMinInputToolbarHeight() - (this.props.renderSnapChatSlideBar ? this.props.snapChatSlideBarHeight : 0)),
             });
         });
     }
@@ -437,7 +437,7 @@ class GiftedChat extends React.Component {
             if ((this.getMaxHeight() !== layout.height && this.getIsFirstLayout() === true)) {
                 this.setMaxHeight(layout.height);
                 this.setState({
-                    messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight() - emojiHeight),
+                    messagesContainerHeight: this.prepareMessagesContainerHeight(this.getMaxHeight() - this.getMinInputToolbarHeight() - emojiHeight - (this.props.renderSnapChatSlideBar ? this.props.snapChatSlideBarHeight : 0)),
                 });
             }
         }
@@ -513,6 +513,7 @@ class GiftedChat extends React.Component {
                 <ActionSheet ref={component => this._actionSheetRef = component}>
                     <View style={styles.container} onLayout={this.onMainViewLayout}>
                         {this.renderMessages()}
+                        {this.props.renderSnapChatSlideBar ? this.props.renderSnapChatSlideBar() : null}
                         {this.props.hideInputBar ? null : this.renderBottomBar()}
                         {this.renderEmoji()}
                     </View>
@@ -587,7 +588,9 @@ GiftedChat.defaultProps = {
     initialListSize: 10,
     pageSize: 10,
     hideInputBar: false,
-    renderSnapChatBtn:null,
+    renderSnapChatBtn: null,
+    renderSnapChatSlideBar: null,
+    snapChatSlideBarHeight: 50,
 }
 ;
 
@@ -636,6 +639,8 @@ GiftedChat.propTypes = {
     pageSize: React.PropTypes.number,//每页Size
     hideInputBar: React.PropTypes.bool,//是否隐藏底部输入bar
     renderSnapChatBtn: React.PropTypes.func,//渲染snapChat 按钮
+    renderSnapChatSlideBar: React.PropTypes.func,
+    snapChatSlideBarHeight: React.PropTypes.number,
 };
 
 export {

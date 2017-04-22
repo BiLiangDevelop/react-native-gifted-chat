@@ -200,8 +200,17 @@ export default class Example extends React.Component {
                 renderComposer={this.renderComposer}
                 customMenuHeight={200}
                 renderSnapChatBtn={this.renderSnapChatBtn.bind(this)}
+                renderSnapChatSlideBar={this.renderSnapChatSlideBar}
             />
         );
+    }
+
+    renderSnapChatSlideBar(){
+        return (
+            <View style={{backgroundColor:'red',height:50}}>
+
+            </View>
+        )
     }
 
     renderSnapChatBtn(){
