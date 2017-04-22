@@ -267,10 +267,10 @@ class GiftedChat extends React.Component {
     }
 
     onKeyboardWillShow(e) {
-        this.setState({
-            showCustomMenu: false,
-            messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + this.props.customMenuHeight : this.state.messagesContainerHeight
-        });
+        // this.setState({
+        //     showCustomMenu: false,
+        //     messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + this.props.customMenuHeight : this.state.messagesContainerHeight
+        // });
         this.setIsTypingDisabled(true);
         this.setKeyboardHeight(e.endCoordinates ? e.endCoordinates.height : e.end.height);
         //打开后可跟键盘高度一样高
@@ -285,6 +285,7 @@ class GiftedChat extends React.Component {
         // } else {
 
         this.setState({
+            showCustomMenu: false,
             messagesContainerHeight: newMessagesContainerHeight,
         });
         // }
