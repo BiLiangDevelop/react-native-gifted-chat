@@ -298,6 +298,8 @@ class GiftedChat extends React.Component {
     }
 
     onShowSnapChat(show) {
+        if (this.show === show)
+            return;
         this.show = show;
         this.hideOnShowingMenu = (this.state.showCustomMenu && !show);
         const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset();
