@@ -618,6 +618,7 @@ GiftedChat.defaultProps = {
     renderSnapChatSlideBar: null,
     snapChatSlideBarHeight: 50,
     snapChatModel: false,
+    onChangeVisibleRows:null,
 }
 ;
 
@@ -668,6 +669,7 @@ GiftedChat.propTypes = {
     snapChatModel: React.PropTypes.bool,
     renderSnapChatBtn: React.PropTypes.func,//渲染snapChat 按钮
     renderSnapChatSlideBar: React.PropTypes.func,
+    onChangeVisibleRows: React.PropTypes.func,
     snapChatSlideBarHeight: React.PropTypes.number,
 };
 

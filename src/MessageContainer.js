@@ -153,6 +153,7 @@ export default class MessageContainer extends React.Component {
                     renderHeader={this.renderFooter}
                     renderFooter={this.renderLoadEarlier}
                     renderScrollComponent={this.renderScrollComponent}
+                    onChangeVisibleRows={this.props.onChangeVisibleRows}
                 />
             </View>
         );
@@ -171,6 +172,7 @@ MessageContainer.defaultProps = {
     pageSize: 10,
     pressContainer:null,
     handleTouch:false,
+    onChangeVisibleRows:null,
 };
 
 MessageContainer.propTypes = {
@@ -183,5 +185,6 @@ MessageContainer.propTypes = {
     initialListSize: React.PropTypes.number,
     pageSize: React.PropTypes.number,
     pressContainer: React.PropTypes.func,
+    onChangeVisibleRows: React.PropTypes.func,
     handleTouch: React.PropTypes.bool,
 };
