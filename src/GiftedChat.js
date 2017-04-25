@@ -68,6 +68,7 @@ class GiftedChat extends React.Component {
         this._locale = 'en';
         this._messages = [];
         this.show = false;
+        this.hideOnShowingMenu = false;
 
         this.state = {
             isInitialized: false, // initialization will calculate maxHeight before rendering the chat
@@ -132,9 +133,14 @@ class GiftedChat extends React.Component {
     hideCustomMenu() {
         this.setState({
             showCustomMenu: false,
-            messagesContainerHeight: this.state.showCustomMenu ? this.state.messagesContainerHeight + this.props.customMenuHeight - (this.show ? this.props.snapChatSlideBarHeight + this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT) : 0) : this.state.messagesContainerHeight
+            messagesContainerHeight: this.state.showCustomMenu ?
+                this.state.messagesContainerHeight + this.props.customMenuHeight
+                - (this.show ? this.props.snapChatSlideBarHeight + this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT)
+                    : this.hideOnShowingMenu ? this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT) + this.props.snapChatSlideBarHeight : 0)
+                : this.state.messagesContainerHeight
         });
         bottomMenuShowing = false;
+        this.hideOnShowingMenu = false;
     }
 
     static append(currentMessages = [], messages) {
@@ -293,6 +299,7 @@ class GiftedChat extends React.Component {
 
     onShowSnapChat(show) {
         this.show = show;
+        this.hideOnShowingMenu = (this.state.showCustomMenu && !show);
         const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset();
         if (show) {
             this.setState({
