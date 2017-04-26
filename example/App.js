@@ -209,7 +209,7 @@ export default class Example extends React.Component {
 
     renderSnapChatSlideBar() {
         return (
-            <View style={{backgroundColor: 'red', height: 50}}>
+            <View style={{backgroundColor: 'yellow', height: 50}}>
 
             </View>
         )
