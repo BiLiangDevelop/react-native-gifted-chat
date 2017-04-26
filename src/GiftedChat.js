@@ -103,7 +103,7 @@ class GiftedChat extends React.Component {
     }
 
     changeCustomMenu() {
-        const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset() + (this.show ? this.props.snapChatSlideBarHeight : 0);
+        const newMessagesContainerHeight = (this.getMaxHeight() - (this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT))) - this.getKeyboardHeight() + this.getBottomOffset() - (this.show ? this.props.snapChatSlideBarHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT) : 0);
         let menuCurrentVisible = this.state.showCustomMenu;
         this.setState({
             showCustomMenu: true,
@@ -134,8 +134,8 @@ class GiftedChat extends React.Component {
         this.setState({
             showCustomMenu: false,
             messagesContainerHeight: this.state.showCustomMenu ?
-                this.state.messagesContainerHeight + this.props.customMenuHeight
-                - (this.show ? this.props.snapChatSlideBarHeight + this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT)
+                this.state.messagesContainerHeight + this.props.customMenuHeight+(this.show?this.props.snapChatSlideBarHeight - (this.state.composerHeight - (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT)) + 12:0)
+                - (this.show ? this.props.snapChatSlideBarHeight - this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT)
                     : this.hideOnShowingMenu ? this.state.composerHeight + (this.getMinInputToolbarHeight() - MIN_COMPOSER_HEIGHT) + this.props.snapChatSlideBarHeight : 0)
                 : this.state.messagesContainerHeight
         });
@@ -618,7 +618,7 @@ GiftedChat.defaultProps = {
     renderSnapChatSlideBar: null,
     snapChatSlideBarHeight: 50,
     snapChatModel: false,
-    onChangeVisibleRows:null,
+    onChangeVisibleRows: null,
 }
 ;
 
