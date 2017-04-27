@@ -303,7 +303,7 @@ class GiftedChat extends React.Component {
         let normalHeight = this.prepareMessagesContainerHeight(this.props.hideInputBar ? this.getMaxHeight() : this.getMaxHeight() - this.getMinInputToolbarHeight() - (this.show ? this.props.snapChatSlideBarHeight : 0))
         if (show) {
             this.setState({
-                messagesContainerHeight: normalHeight - this.props.snapChatSlideBarHeight,
+                messagesContainerHeight: normalHeight,
             });
         } else {
             this.setState({
