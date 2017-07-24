@@ -10,7 +10,7 @@ import {
 
 import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard'
 
-import ActionSheet from '@exponent/react-native-action-sheet';
+import ActionSheet from '@expo/react-native-action-sheet';
 import moment from 'moment/min/moment-with-locales.min';
 import uuid from 'uuid';
 
@@ -90,6 +90,8 @@ class GiftedChat extends React.Component {
         this.onInitialLayoutViewLayout = this.onInitialLayoutViewLayout.bind(this);
         this.renderInputToolbar = this.renderInputToolbar.bind(this)
         this.onShowSnapChat = this.onShowSnapChat.bind(this);
+        this.changeCustomMenu = this.changeCustomMenu.bind(this);
+        this.hideCustomMenu = this.hideCustomMenu.bind(this);
 
 
         this.invertibleScrollViewProps = {
@@ -107,7 +109,7 @@ class GiftedChat extends React.Component {
         let menuCurrentVisible = this.state.showCustomMenu;
         this.setState({
             showCustomMenu: true,
-            messagesContainerHeight: this.getKeyboardHeight() === 0 ? newMessagesContainerHeight - this.props.customMenuHeight : this.state.messagesContainerHeight,
+            messagesContainerHeight: this.prepareMessagesContainerHeight(this.getKeyboardHeight() === 0 ? newMessagesContainerHeight - this.props.customMenuHeight : this.state.messagesContainerHeight),
             typingDisabled: false
         });
         if (this.getKeyboardHeight() > 0) {
@@ -133,9 +135,9 @@ class GiftedChat extends React.Component {
     hideCustomMenu() {
         this.setState({
             showCustomMenu: false,
-            messagesContainerHeight: this.state.showCustomMenu ?
+            messagesContainerHeight: this.prepareMessagesContainerHeight(this.state.showCustomMenu ?
                 this.state.messagesContainerHeight + this.props.customMenuHeight
-                : this.state.messagesContainerHeight
+                : this.state.messagesContainerHeight)
         });
         bottomMenuShowing = false;
         this.hideOnShowingMenu = false;
@@ -267,6 +269,7 @@ class GiftedChat extends React.Component {
         if (this.props.isAnimated === true) {
             return new Animated.Value(value);
         }
+        console.log('messagesContainerHeight', value)
         return value;
     }
 
@@ -290,7 +293,7 @@ class GiftedChat extends React.Component {
 
         this.setState({
             showCustomMenu: false,
-            messagesContainerHeight: newMessagesContainerHeight,
+            messagesContainerHeight: this.prepareMessagesContainerHeight(newMessagesContainerHeight),
         });
         // }
     }
@@ -302,11 +305,11 @@ class GiftedChat extends React.Component {
         let normalHeight = this.props.hideInputBar ? this.getMaxHeight() : this.getMaxHeight() - this.getMinInputToolbarHeight() - (this.show ? this.props.snapChatSlideBarHeight : 0)
         if (show) {
             this.setState({
-                messagesContainerHeight: normalHeight,
+                messagesContainerHeight: this.prepareMessagesContainerHeight(normalHeight),
             });
         } else {
             this.setState({
-                messagesContainerHeight: this.state.messagesContainerHeight + this.props.snapChatSlideBarHeight,
+                messagesContainerHeight: this.prepareMessagesContainerHeight(this.state.messagesContainerHeight + this.props.snapChatSlideBarHeight),
             });
         }
     }
@@ -325,7 +328,7 @@ class GiftedChat extends React.Component {
         // } else {
         let height = this.state.showCustomMenu ? newMessagesContainerHeight - this.props.customMenuHeight : newMessagesContainerHeight;
         this.setState({
-            messagesContainerHeight: height,
+            messagesContainerHeight: this.prepareMessagesContainerHeight(height),
         });
         // }
     }
