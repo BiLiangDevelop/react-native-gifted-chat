@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 
 import {GiftedChat, Actions, Bubble, ActionsRight, IconButton} from 'react-native-gifted-chat';
-import CustomActions from './CustomActions';
 import CustomView from './CustomView';
 import Composer from './Composer'
 
