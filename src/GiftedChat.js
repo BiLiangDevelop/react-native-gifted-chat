@@ -10,7 +10,7 @@ import {
 
 import dismissKeyboard from 'react-native/Libraries/Utilities/dismissKeyboard'
 
-import ActionSheet from '@expo/react-native-action-sheet';
+import ActionSheet from '@exponent/react-native-action-sheet';
 import moment from 'moment/min/moment-with-locales.min';
 import uuid from 'uuid';
 
