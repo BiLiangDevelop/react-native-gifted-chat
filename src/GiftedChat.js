@@ -266,9 +266,9 @@ class GiftedChat extends React.Component {
     }
 
     prepareMessagesContainerHeight(value) {
-        if (this.props.isAnimated === true) {
-            return new Animated.Value(value);
-        }
+        // if (this.props.isAnimated === true) {
+        //     return new Animated.Value(value);
+        // }
         console.log('messagesContainerHeight', value)
         return value;
     }
