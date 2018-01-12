@@ -38,6 +38,7 @@
   "dependencies": {
     "@exponent/react-native-action-sheet": "0.3.0",
     "md5": "2.2.1",
+    "moment": "^2.20.1",
     "react-native-communications": "2.1.1",
     "react-native-invertible-scroll-view": "git+https://github.com/V1sk/react-native-invertible-scroll-view.git",
     "react-native-lightbox": "oblador/react-native-lightbox#c84a8543d4511fe6a44c3d7820747c9c1bddd875",
