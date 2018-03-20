@@ -4,7 +4,7 @@ import {
     ListView,
     View,
 } from 'react-native';
-
+import PropTypes from 'prop-types';
 import shallowequal from 'shallowequal';
 import InvertibleScrollView from 'react-native-invertible-scroll-view';
 import md5 from 'md5';
@@ -176,15 +176,15 @@ MessageContainer.defaultProps = {
 };
 
 MessageContainer.propTypes = {
-    messages: React.PropTypes.array,
-    user: React.PropTypes.object,
-    renderFooter: React.PropTypes.func,
-    renderMessage: React.PropTypes.func,
-    onLoadEarlier: React.PropTypes.func,
-    listViewProps: React.PropTypes.object,
-    initialListSize: React.PropTypes.number,
-    pageSize: React.PropTypes.number,
-    pressContainer: React.PropTypes.func,
-    onChangeVisibleRows: React.PropTypes.func,
-    handleTouch: React.PropTypes.bool,
+    messages: PropTypes.array,
+    user: PropTypes.object,
+    renderFooter: PropTypes.func,
+    renderMessage: PropTypes.func,
+    onLoadEarlier: PropTypes.func,
+    listViewProps: PropTypes.object,
+    initialListSize: PropTypes.number,
+    pageSize: PropTypes.number,
+    pressContainer: PropTypes.func,
+    onChangeVisibleRows: PropTypes.func,
+    handleTouch: PropTypes.bool,
 };

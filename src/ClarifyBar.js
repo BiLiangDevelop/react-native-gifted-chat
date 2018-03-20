@@ -8,7 +8,7 @@ import {
     Text,
     TouchableOpacity
 } from 'react-native';
-
+import PropTypes from 'prop-types';
 export default class ClarifyBar extends React.Component {
 
     constructor(props) {
@@ -136,10 +136,10 @@ ClarifyBar.defaultProps = {
 }
 
 ClarifyBar.propTypes = {
-    inputToolbar: React.PropTypes.object,
-    renderClarifyStateNormal: React.PropTypes.func,
-    renderClarifyStateInput: React.PropTypes.func,
-    hideBottomMenu: React.PropTypes.func,
-    renderClarifyItems: React.PropTypes.func,
+    inputToolbar: PropTypes.object,
+    renderClarifyStateNormal: PropTypes.func,
+    renderClarifyStateInput: PropTypes.func,
+    hideBottomMenu: PropTypes.func,
+    renderClarifyItems: PropTypes.func,
 
 }

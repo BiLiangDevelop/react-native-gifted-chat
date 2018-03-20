@@ -3,8 +3,10 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
+    ViewPropTypes,
     View,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class ActionsRight extends React.Component {
     constructor(props) {
@@ -87,7 +89,7 @@ const styles = StyleSheet.create({
 });
 
 ActionsRight.contextTypes = {
-    actionSheet: React.PropTypes.func,
+    actionSheet: PropTypes.func,
 };
 
 ActionsRight.defaultProps = {
@@ -101,11 +103,11 @@ ActionsRight.defaultProps = {
 };
 
 ActionsRight.propTypes = {
-    onSend: React.PropTypes.func,
-    options: React.PropTypes.object,
-    optionTintColor: React.PropTypes.string,
-    icon: React.PropTypes.func,
-    onPressActionRightButton: React.PropTypes.func,
-    containerStyle: View.propTypes.style,
-    iconTextStyle: Text.propTypes.style,
+    onSend: PropTypes.func,
+    options: PropTypes.object,
+    optionTintColor: PropTypes.string,
+    icon: PropTypes.func,
+    onPressActionRightButton: PropTypes.func,
+    containerStyle: ViewPropTypes.style,
+    iconTextStyle: ViewPropTypes.style,
 };

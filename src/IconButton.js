@@ -8,6 +8,7 @@ import {
     View,
     TouchableOpacity
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class IconButton extends React.Component {
     render() {
@@ -55,7 +56,7 @@ IconButton.defaultProps = {
 }
 
 IconButton.propTypes = {
-    icon: React.PropTypes.string,
-    textIcon: React.PropTypes.string,
-    onIconClick: React.PropTypes.func,
+    icon: PropTypes.string,
+    textIcon: PropTypes.string,
+    onIconClick: PropTypes.func,
 }

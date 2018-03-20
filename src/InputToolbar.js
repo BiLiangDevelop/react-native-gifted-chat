@@ -2,10 +2,11 @@ import React from 'react';
 import {
     StyleSheet,
     View,
+    ViewPropTypes,
     Text,
     TouchableOpacity
 } from 'react-native';
-
+import PropTypes from 'prop-types';
 import Composer from './Composer';
 import Send from './Send';
 import ActionsRight from './ActionsRight';
@@ -50,7 +51,7 @@ export default class InputToolbar extends React.Component {
         if (this.props.text.trim().length > 0) {
             if (this.props.renderSend) {
                 return this.props.renderSend(this.props);
-            }else{
+            } else {
                 return <Send {...this.props}/>;
             }
 
@@ -95,8 +96,8 @@ export default class InputToolbar extends React.Component {
         return null;
     }
 
-    renderSnapChatBtn(){
-        if(this.props.renderSnapChatBtn){
+    renderSnapChatBtn() {
+        if (this.props.renderSnapChatBtn) {
             return this.props.renderSnapChatBtn();
         }
         return null;
@@ -111,7 +112,7 @@ export default class InputToolbar extends React.Component {
                         this.setState({
                             inputAudio: !this.state.inputAudio,
                         })
-                        if(this.props.hideBottomMenu){
+                        if (this.props.hideBottomMenu) {
                             this.props.hideBottomMenu();
                         }
                     }}>
@@ -156,25 +157,25 @@ InputToolbar.defaultProps = {
     renderMenuButton: null,
     renderHoldToTalkButton: null,
     hideBottomMenu: null,
-    renderSnapChatBtn:null,
+    renderSnapChatBtn: null,
 };
 
 InputToolbar.propTypes = {
-    renderAccessory: React.PropTypes.func,
-    renderActions: React.PropTypes.func,
-    renderActionsRight: React.PropTypes.func,
-    renderSend: React.PropTypes.func,
-    renderComposer: React.PropTypes.func,
-    onPressActionButton: React.PropTypes.func,
-    onPressActionRightButton: React.PropTypes.func,
-    containerStyle: View.propTypes.style,
-    primaryStyle: View.propTypes.style,
-    accessoryStyle: View.propTypes.style,
-    showBorderTop: React.PropTypes.bool,
-    renderAudioButton: React.PropTypes.func,
-    renderKeyboardButton: React.PropTypes.func,
-    renderMenuButton: React.PropTypes.func,
-    renderHoldToTalkButton: React.PropTypes.func,
-    hideBottomMenu: React.PropTypes.func,
-    renderSnapChatBtn: React.PropTypes.func,
+    renderAccessory: PropTypes.func,
+    renderActions: PropTypes.func,
+    renderActionsRight: PropTypes.func,
+    renderSend: PropTypes.func,
+    renderComposer: PropTypes.func,
+    onPressActionButton: PropTypes.func,
+    onPressActionRightButton: PropTypes.func,
+    containerStyle: ViewPropTypes.style,
+    primaryStyle: ViewPropTypes.style,
+    accessoryStyle: ViewPropTypes.style,
+    showBorderTop: PropTypes.bool,
+    renderAudioButton: PropTypes.func,
+    renderKeyboardButton: PropTypes.func,
+    renderMenuButton: PropTypes.func,
+    renderHoldToTalkButton: PropTypes.func,
+    hideBottomMenu: PropTypes.func,
+    renderSnapChatBtn: PropTypes.func,
 };

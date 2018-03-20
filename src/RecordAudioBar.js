@@ -10,7 +10,7 @@ import {
     Text,
     View
 } from 'react-native';
-
+import PropTypes from 'prop-types';
 export default class RecordAudioBar extends React.Component {
     render() {
         return (
@@ -64,5 +64,5 @@ RecordAudioBar.defaultProps = {
 }
 
 RecordAudioBar.propTypes = {
-    renderHoldToTalkButton: React.PropTypes.func,
+    renderHoldToTalkButton: PropTypes.func,
 }

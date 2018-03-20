@@ -32,7 +32,7 @@ import GiftedAvatar from './GiftedAvatar';
 import ActionsRight from './ActionsRight';
 import ClarifyBar from './ClarifyBar'
 import IconButton from './IconButton'
-
+import PropTypes from 'prop-types';
 
 // Min and max heights of ToolbarInput and Composer
 // Needed for Composer auto grow and ScrollView animation
@@ -563,8 +563,8 @@ const styles = StyleSheet.create({
 });
 
 GiftedChat.childContextTypes = {
-    actionSheet: React.PropTypes.func,
-    getLocale: React.PropTypes.func,
+    actionSheet: PropTypes.func,
+    getLocale: PropTypes.func,
 };
 
 GiftedChat.defaultProps = {
@@ -624,54 +624,54 @@ GiftedChat.defaultProps = {
 ;
 
 GiftedChat.propTypes = {
-    messages: React.PropTypes.array,
-    onSend: React.PropTypes.func,
-    onInputTextChanged: React.PropTypes.func,
-    loadEarlier: React.PropTypes.bool,
-    onLoadEarlier: React.PropTypes.func,
-    locale: React.PropTypes.string,
-    isAnimated: React.PropTypes.bool,
-    renderAccessory: React.PropTypes.func,
-    renderActions: React.PropTypes.func,
-    renderActionsRight: React.PropTypes.func,
-    renderAvatar: React.PropTypes.func,
-    renderBubble: React.PropTypes.func,
-    renderFooter: React.PropTypes.func,
-    renderChatFooter: React.PropTypes.func,
-    renderMessageText: React.PropTypes.func,
-    renderMessageImage: React.PropTypes.func,
-    renderComposer: React.PropTypes.func,
-    renderCustomView: React.PropTypes.func,
-    renderDay: React.PropTypes.func,
-    renderInputToolbar: React.PropTypes.func,
-    renderLoadEarlier: React.PropTypes.func,
-    renderLoading: React.PropTypes.func,
-    renderMessage: React.PropTypes.func,
-    renderSend: React.PropTypes.func,
-    renderTime: React.PropTypes.func,
-    user: React.PropTypes.object,
-    bottomOffset: React.PropTypes.number,
-    isLoadingEarlier: React.PropTypes.bool,
-    messageIdGenerator: React.PropTypes.func,
-    keyboardShouldPersistTaps: React.PropTypes.oneOf(['always', 'never', 'handled']),
-    isFromClarify: React.PropTypes.bool,//是否从澄清界面过来
-    renderCustomMenu: React.PropTypes.func,//底部自定义菜单
-    renderHoldToTalkButton: React.PropTypes.func,//按住说话
-    renderAudioButton: React.PropTypes.func,//语音按钮
-    renderKeyboardButton: React.PropTypes.func,//键盘按钮
-    renderMenuButton: React.PropTypes.func,//右边的菜单加号按钮
-    renderClarifyStateNormal: React.PropTypes.func,//澄清界面底部bar左边按钮，默认状态
-    renderClarifyStateInput: React.PropTypes.func,//澄清界面底部bar左边按钮，切换为输入框时状态
-    renderClarifyItems: React.PropTypes.func,//澄清界面底部bar的动态按钮项
-    customMenuHeight: React.PropTypes.number,//自定义菜单高度
-    initialListSize: React.PropTypes.number,//聊天内容初始化列表Size
-    pageSize: React.PropTypes.number,//每页Size
-    hideInputBar: React.PropTypes.bool,//是否隐藏底部输入bar
-    snapChatModel: React.PropTypes.bool,
-    renderSnapChatBtn: React.PropTypes.func,//渲染snapChat 按钮
-    renderSnapChatSlideBar: React.PropTypes.func,
-    onChangeVisibleRows: React.PropTypes.func,
-    snapChatSlideBarHeight: React.PropTypes.number,
+    messages: PropTypes.array,
+    onSend: PropTypes.func,
+    onInputTextChanged: PropTypes.func,
+    loadEarlier: PropTypes.bool,
+    onLoadEarlier: PropTypes.func,
+    locale: PropTypes.string,
+    isAnimated: PropTypes.bool,
+    renderAccessory: PropTypes.func,
+    renderActions: PropTypes.func,
+    renderActionsRight: PropTypes.func,
+    renderAvatar: PropTypes.func,
+    renderBubble: PropTypes.func,
+    renderFooter: PropTypes.func,
+    renderChatFooter: PropTypes.func,
+    renderMessageText: PropTypes.func,
+    renderMessageImage: PropTypes.func,
+    renderComposer: PropTypes.func,
+    renderCustomView: PropTypes.func,
+    renderDay: PropTypes.func,
+    renderInputToolbar: PropTypes.func,
+    renderLoadEarlier: PropTypes.func,
+    renderLoading: PropTypes.func,
+    renderMessage: PropTypes.func,
+    renderSend: PropTypes.func,
+    renderTime: PropTypes.func,
+    user: PropTypes.object,
+    bottomOffset: PropTypes.number,
+    isLoadingEarlier: PropTypes.bool,
+    messageIdGenerator: PropTypes.func,
+    keyboardShouldPersistTaps: PropTypes.oneOf(['always', 'never', 'handled']),
+    isFromClarify: PropTypes.bool,//是否从澄清界面过来
+    renderCustomMenu: PropTypes.func,//底部自定义菜单
+    renderHoldToTalkButton: PropTypes.func,//按住说话
+    renderAudioButton: PropTypes.func,//语音按钮
+    renderKeyboardButton: PropTypes.func,//键盘按钮
+    renderMenuButton: PropTypes.func,//右边的菜单加号按钮
+    renderClarifyStateNormal: PropTypes.func,//澄清界面底部bar左边按钮，默认状态
+    renderClarifyStateInput: PropTypes.func,//澄清界面底部bar左边按钮，切换为输入框时状态
+    renderClarifyItems: PropTypes.func,//澄清界面底部bar的动态按钮项
+    customMenuHeight: PropTypes.number,//自定义菜单高度
+    initialListSize: PropTypes.number,//聊天内容初始化列表Size
+    pageSize: PropTypes.number,//每页Size
+    hideInputBar: PropTypes.bool,//是否隐藏底部输入bar
+    snapChatModel: PropTypes.bool,
+    renderSnapChatBtn: PropTypes.func,//渲染snapChat 按钮
+    renderSnapChatSlideBar: PropTypes.func,
+    onChangeVisibleRows: PropTypes.func,
+    snapChatSlideBarHeight: PropTypes.number,
 };
 
 export {
